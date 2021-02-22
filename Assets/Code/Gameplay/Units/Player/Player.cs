@@ -5,16 +5,16 @@ namespace Game.Gameplay
     public class Player : Unit
     {
         //TODO: rework
-        [Zenject.Inject] ProjectilesPool projectilePool = null;
-        [Zenject.Inject] PlayableArea playableArea = null;
+        [Zenject.Inject] private ProjectilesPool projectilePool = null;
+        [Zenject.Inject] private PlayableArea playableArea = null;
 
-        [Zenject.Inject] InputController inputCtrl = null;
+        [Zenject.Inject] private InputController inputCtrl = null;
 
         //TODO: STRONG TYPING!
         private PlayerStats playerStats => (PlayerStats)stats;
 
         //debug hax
-        bool godMode = false;
+        private bool godMode = false;
 
         protected override void Initialize()
         {
@@ -23,28 +23,35 @@ namespace Game.Gameplay
             inputCtrl.GodModePressed += SwitchGodMode;
         }
 
-        void SwitchGodMode()
+        private void SwitchGodMode()
         {
             godMode = !godMode;
 
             if (godMode)
-                meshRenderer.SetEmission(Color.green); //just for visibility
+            {
+                spriteRenderer.SetEmission(Color.green); //just for visibility
+            }
             else
-                meshRenderer.SetEmission(stats.Color);
+            {
+                spriteRenderer.SetEmission(stats.Color);
+            }
         }
 
         protected override void CalculateHealthLeft(float damageAmount)
         {
             if (!godMode)
+            {
                 base.CalculateHealthLeft(damageAmount);
+            }
         }
 
         protected override void ClearEvents()
         {
             base.ClearEvents();
             if (inputCtrl != null)
+            {
                 inputCtrl.GodModePressed -= SwitchGodMode;
-
+            }
         }
         private void OnDestroy()
         {
@@ -58,7 +65,9 @@ namespace Game.Gameplay
             //there was supposed to be a feature with gun heat and cooldown,
             //to sometimes be able to shoot a series of projectiles, but...well, have fun
             if (inputCtrl.Fire)
+            {
                 Shoot();
+            }
 
             ShootIfCan();
         }
@@ -82,7 +91,13 @@ namespace Game.Gameplay
             var newPosition = transform.position + Vector3.right * horizontalInput * Time.deltaTime * playerStats.Speed;
 
             if (playableArea.GameBounds.Contains(newPosition))
+            {
                 transform.position = newPosition;
+            }
+            else
+            {
+                Debug.LogError($"{newPosition} position out of bounds");
+            }
         }
 
 #if UNITY_EDITOR

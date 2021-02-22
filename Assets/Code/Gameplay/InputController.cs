@@ -5,13 +5,13 @@ namespace Game.Gameplay
     //just input
     public class InputController : MonoBehaviour
     {
-        [Zenject.Inject] GameplayController gameplayCtrl = null;
-        float horizontal = 0;
-        bool fire;
+        [Zenject.Inject] private GameplayController gameplayCtrl = null;
+        private float horizontal = 0;
+        private bool fire;
 
         //debug
-        bool restart;
-        bool destroyAll;
+        private bool restart;
+        private bool destroyAll;
 
         public float Horizontal => horizontal;
         public bool Fire => fire;
@@ -20,7 +20,7 @@ namespace Game.Gameplay
         public System.Action KillAllEnemies;
         public System.Action GodModePressed;
 
-        void Update()
+        private void Update()
         {
             restart = false;
             destroyAll = false;
@@ -32,7 +32,9 @@ namespace Game.Gameplay
             if (restart)
             {
                 if (Restart != null)
+                {
                     Restart();
+                }
             }
 
             //cluttered code
@@ -44,17 +46,48 @@ namespace Game.Gameplay
                 if (Input.GetKeyDown(KeyCode.F3))
                 {
                     if (GodModePressed != null)
+                    {
                         GodModePressed();
+                    }
                 }
                 #endregion
 
+#if !UNITY_EDITOR && (UNITY_ANDROID || UNITY_IOS)
+                float screenMiddle = Screen.width / 2;
+                var isTouching = Input.GetMouseButton(0);
+                if (isTouching)
+                {
+                    var touchPosition = Input.GetTouch(0).position;
+
+                    Vector2 direction;
+
+                    if (touchPosition.x < screenMiddle)
+                    {
+                        direction = Vector2.left;
+                    }
+                    else
+                    {
+                        direction = Vector2.right;
+                    }
+                    horizontal = direction.x;
+                }
+                else
+                {
+                    horizontal = 0;
+                }
+
+                fire = Input.touchCount == 2;
+#else
                 horizontal = Input.GetAxisRaw("Horizontal");
                 fire = Input.GetButtonDown("Fire1");
+#endif
 
                 if (destroyAll)
                 {
                     if (KillAllEnemies != null)
+                    {
                         KillAllEnemies();
+                    }
                 }
             }
 

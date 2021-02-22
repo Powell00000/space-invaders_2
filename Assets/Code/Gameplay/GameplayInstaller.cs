@@ -8,8 +8,8 @@ namespace Game.Gameplay
         [SerializeField] private GameplayController gameplayController = null;
         [SerializeField] private InputController inputController = null;
         [SerializeField] private UnitDefinitionsProvider unitDefinitionsProvider = null;
-        [SerializeField] PlayableArea playableArea = null;
-        [SerializeField] WaveManager waveManager = null;
+        [SerializeField] private PlayableArea playableArea = null;
+        [SerializeField] private WaveManager waveManager = null;
 
 
         public override void InstallBindings()

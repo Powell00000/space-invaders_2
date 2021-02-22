@@ -6,12 +6,12 @@ namespace Game.Gameplay
     public abstract class Unit : MonoBehaviour, IUnit
     {
         //TODO: create system for updating units during gameplay state
-        [Zenject.Inject] GameplayController gameplayCtrl = null;
+        [Zenject.Inject] private GameplayController gameplayCtrl = null;
 
         [SerializeField] protected BoxCollider2D boxCollider2d = null;
         //TODO: strong typing
         [SerializeField] protected UnitStats stats = null;
-        [SerializeField] protected MeshRenderer meshRenderer = null;
+        [SerializeField] protected SpriteRenderer spriteRenderer = null;
 
         protected float currentHealth;
         protected EFaction faction;
@@ -26,14 +26,16 @@ namespace Game.Gameplay
 
         EFaction IUnit.Faction => faction;
 
-        float shootTimer;
-        float shootMaxTime;
+        private float shootTimer;
+        private float shootMaxTime;
         protected bool CanShoot => shootTimer >= shootMaxTime;
 
         protected virtual void Death()
         {
             if (OnDeath != null)
+            {
                 OnDeath(this);
+            }
         }
 
         private void Start()
@@ -46,7 +48,7 @@ namespace Game.Gameplay
         {
             currentHealth = stats.Health;
 
-            meshRenderer.SetEmission(stats.Color);
+            spriteRenderer.color = stats.Color;
             shootMaxTime = stats.ShootTime;
             shootTimer = 0;
         }
@@ -60,7 +62,9 @@ namespace Game.Gameplay
         void IUnit.ReceiveDamage(float amount)
         {
             if (OnDamageReceived != null)
+            {
                 OnDamageReceived();
+            }
 
             CalculateHealthLeft(amount);
             if (currentHealth <= 0)
@@ -81,15 +85,20 @@ namespace Game.Gameplay
         protected virtual void Update()
         {
             if (gameplayCtrl.CurrentGameplayState != EGameplayState.Playing)
+            {
                 return;
+            }
+
             CalculateShootTime();
             MovementFunction();
         }
 
-        void CalculateShootTime()
+        private void CalculateShootTime()
         {
             if (shootTimer < shootMaxTime)
+            {
                 shootTimer += Time.deltaTime;
+            }
         }
 
         public void ForceDeath()
@@ -100,7 +109,10 @@ namespace Game.Gameplay
         public void ShootIfCan()
         {
             if (!CanShoot)
+            {
                 return;
+            }
+
             Shoot();
             shootTimer = 0;
         }

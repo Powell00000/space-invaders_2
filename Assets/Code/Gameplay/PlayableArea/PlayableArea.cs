@@ -6,12 +6,11 @@ namespace Game.Gameplay
     public class PlayableArea : MonoBehaviour
     {
         //can be set from inspector, Camera keeps transforms in view
-        [SerializeField] Transform left = null;
-        [SerializeField] Transform right = null;
-        [SerializeField] Transform top = null;
-        [SerializeField] Transform bottom = null;
-
-        Bounds gameBounds;
+        [SerializeField] private Transform left = null;
+        [SerializeField] private Transform right = null;
+        [SerializeField] private Transform top = null;
+        [SerializeField] private Transform bottom = null;
+        private Bounds gameBounds;
 
         public Bounds GameBounds => gameBounds;
 
@@ -21,7 +20,7 @@ namespace Game.Gameplay
         public float Width => Mathf.Abs(left.position.x) + Mathf.Abs(right.position.x);
         public float PlayableHeight => Vector3.Distance(PlayerSpawnPosition + Vector3.up * 5, TopGridSpawnPosition - Vector3.up * 2);
 
-        void CalculateBounds()
+        public void CalculateBounds()
         {
             gameBounds = new Bounds(transform.position, Vector3.zero);
             gameBounds.Encapsulate(left.transform.position);
@@ -32,25 +31,35 @@ namespace Game.Gameplay
 
 #if UNITY_EDITOR
 
-        bool TransformsValid()
+        private bool TransformsValid()
         {
             if (left == null || right == null || top == null || bottom == null)
+            {
                 return false;
+            }
             else
+            {
                 return true;
+            }
         }
 
         private void OnValidate()
         {
             if (!TransformsValid())
+            {
                 return;
+            }
+
             CalculateBounds();
         }
 
         private void OnDrawGizmos()
         {
             if (!TransformsValid())
+            {
                 return;
+            }
+
             CalculateBounds();
             Gizmos.color = Color.green;
             Gizmos.DrawWireCube(gameBounds.center, gameBounds.size);
