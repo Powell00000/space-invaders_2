@@ -1,0 +1,636 @@
+fileFormatVersion: 2
+guid: 1aea7b0e36191c14381dc2337b8043c8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7800703560180344041
+    second: dlf.pt-space-invaders-png-4618726_0
+  - first:
+      213: 8535904028482237896
+    second: dlf.pt-space-invaders-png-4618726_1
+  - first:
+      213: -7973177879682857641
+    second: dlf.pt-space-invaders-png-4618726_2
+  - first:
+      213: -2517490452998157926
+    second: dlf.pt-space-invaders-png-4618726_3
+  - first:
+      213: -7588944164959730508
+    second: dlf.pt-space-invaders-png-4618726_4
+  - first:
+      213: -1334514939914696026
+    second: dlf.pt-space-invaders-png-4618726_5
+  - first:
+      213: -7664766573405560681
+    second: dlf.pt-space-invaders-png-4618726_6
+  - first:
+      213: -345746844893582906
+    second: dlf.pt-space-invaders-png-4618726_7
+  - first:
+      213: 7184986583935804710
+    second: dlf.pt-space-invaders-png-4618726_8
+  - first:
+      213: -1191463368141114451
+    second: dlf.pt-space-invaders-png-4618726_9
+  - first:
+      213: 1385802319322352269
+    second: dlf.pt-space-invaders-png-4618726_10
+  - first:
+      213: -9119532841569723840
+    second: dlf.pt-space-invaders-png-4618726_11
+  - first:
+      213: -4705757912464044164
+    second: dlf.pt-space-invaders-png-4618726_12
+  - first:
+      213: 6994548646066583941
+    second: dlf.pt-space-invaders-png-4618726_13
+  - first:
+      213: -5657151519978511594
+    second: dlf.pt-space-invaders-png-4618726_14
+  - first:
+      213: 7696097031515420551
+    second: dlf.pt-space-invaders-png-4618726_15
+  - first:
+      213: -2056164038505139968
+    second: dlf.pt-space-invaders-png-4618726_16
+  - first:
+      213: 2441608266099078980
+    second: dlf.pt-space-invaders-png-4618726_17
+  - first:
+      213: -7611812954639256507
+    second: dlf.pt-space-invaders-png-4618726_18
+  - first:
+      213: -3732781224220902406
+    second: dlf.pt-space-invaders-png-4618726_19
+  - first:
+      213: -73136083907114378
+    second: dlf.pt-space-invaders-png-4618726_20
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_0
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 240.66666
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e4acaede8aa14c60800000000000000
+      internalID: 7800703560180344041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_1
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 240.66666
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c5728e1d7f957670800000000000000
+      internalID: 8535904028482237896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_2
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 240.66666
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 755408e46f4995190800000000000000
+      internalID: -7973177879682857641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_3
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 240.66666
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a998b9f65c3101dd0800000000000000
+      internalID: -2517490452998157926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_4
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 240.66666
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b44d4b6d77aea690800000000000000
+      internalID: -7588944164959730508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_5
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 240.66666
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6aacee29bb9da7de0800000000000000
+      internalID: -1334514939914696026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_6
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 240.66666
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 790afd1496741a590800000000000000
+      internalID: -7664766573405560681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_7
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 240.66666
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c9e7ef8319a33bf0800000000000000
+      internalID: -345746844893582906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120.666664
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 625e07bfa3336b360800000000000000
+      internalID: 7184986583935804710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_9
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 120.666664
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da3fe0b1162177fe0800000000000000
+      internalID: -1191463368141114451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_10
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 120.666664
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8a0f1cfddb5b3310800000000000000
+      internalID: 1385802319322352269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_11
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 120.666664
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04a5abca239e07180800000000000000
+      internalID: -9119532841569723840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_12
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 120.666664
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7fc89c5c1ac1beb0800000000000000
+      internalID: -4705757912464044164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_13
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 120.666664
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 589fcf45fe0a11160800000000000000
+      internalID: 6994548646066583941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_14
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 120.666664
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 613ae1b5aa2cd71b0800000000000000
+      internalID: -5657151519978511594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_15
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 120.666664
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7873a6879770eca60800000000000000
+      internalID: 7696097031515420551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_16
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 120.666664
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 001f7f473b90773e0800000000000000
+      internalID: -2056164038505139968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.6666641
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4473e7528c552e120800000000000000
+      internalID: 2441608266099078980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_18
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 0.6666641
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 544b20662786d5690800000000000000
+      internalID: -7611812954639256507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_19
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 0.6666641
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afbb012f04f723cc0800000000000000
+      internalID: -3732781224220902406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dlf.pt-space-invaders-png-4618726_20
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 0.6666641
+        width: 110.111115
+        height: 120.333336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67a04728e1b2cfef0800000000000000
+      internalID: -73136083907114378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
