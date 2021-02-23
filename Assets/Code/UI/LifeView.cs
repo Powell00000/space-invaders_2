@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Code.UI
 {
-    public class LivesView : MonoBehaviour
+    public class LifeView : MonoBehaviour
     {
         [Zenject.Inject] private PlayerController playerController;
         [SerializeField] protected TMPro.TextMeshProUGUI livesLabel;
