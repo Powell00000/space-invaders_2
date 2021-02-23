@@ -4,7 +4,7 @@
     {
         EFaction Faction { get; }
 
-        void ReceiveDamage(float amout);
+        void ReceiveDamage(int amout);
         void ShootIfCan();
 
         void ForceDeath();

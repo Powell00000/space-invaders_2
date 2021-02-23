@@ -3,14 +3,14 @@
 //base class for unit stats
 public abstract class UnitStats : ScriptableObject
 {
-    [SerializeField] private float health = 1;
-    [SerializeField] int pointsForDestroying = 10;
-    [SerializeField] Color color = Color.black;
+    [SerializeField] private int hitsTillDeath = 1;
+    [SerializeField] private int pointsForDestroying = 10;
+    [SerializeField] private Color color = Color.black;
 
-    [SerializeField] float baseProjectileSpeed = 10;
-    [SerializeField] float shootTime = 1;
+    [SerializeField] private float baseProjectileSpeed = 10;
+    [SerializeField] private float shootTime = 1;
 
-    public float Health => health;
+    public int HitsTillDeath => hitsTillDeath;
     public int PointsForDestroying => pointsForDestroying;
     public Color Color => color;
 

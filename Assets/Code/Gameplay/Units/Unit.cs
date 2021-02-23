@@ -14,7 +14,7 @@ namespace Game.Gameplay
         [SerializeField] protected BoxCollider2D boxCollider2d = null;
         [SerializeField] protected SpriteRenderer spriteRenderer = null;
 
-        protected float currentHealth;
+        protected int currentHealth;
         protected EFaction faction;
 
         //TODO: Change System.Action into custom events implementation for automatic refs cleanup
@@ -24,7 +24,7 @@ namespace Game.Gameplay
         public BoxCollider2D BoxCollider2D => boxCollider2d;
         //TODO: strong typing
         public UnitStats Stats { get; protected set; }
-        public float CurrentHealth => currentHealth;
+        public int CurrentHealth => currentHealth;
 
         EFaction IUnit.Faction => faction;
 
@@ -49,7 +49,7 @@ namespace Game.Gameplay
 
         protected virtual void Initialize()
         {
-            currentHealth = Stats.Health;
+            currentHealth = Stats.HitsTillDeath;
 
             spriteRenderer.color = Stats.Color;
             shootMaxTime = Stats.ShootTime;
@@ -62,14 +62,12 @@ namespace Game.Gameplay
             OnDeath = null;
         }
 
-        void IUnit.ReceiveDamage(float amount)
+        void IUnit.ReceiveDamage(int amount)
         {
-            if (OnDamageReceived != null)
-            {
-                OnDamageReceived();
-            }
-
             CalculateHealthLeft(amount);
+
+            OnDamageReceived?.Invoke();
+
             if (currentHealth <= 0)
             {
                 Death();
@@ -77,7 +75,7 @@ namespace Game.Gameplay
         }
 
         //for custom implementation (GODMODE)
-        protected virtual void CalculateHealthLeft(float damageAmount)
+        protected virtual void CalculateHealthLeft(int damageAmount)
         {
             currentHealth -= damageAmount;
         }

@@ -3,10 +3,10 @@
 [CreateAssetMenu(menuName = "Stats/Projectile")]
 public class ProjectileStats : ScriptableObject
 {
-    [SerializeField] float damage = 1;
-    [SerializeField] int pointsForDestroying = 5;
+    [SerializeField] private int damage = 1;
+    [SerializeField] private int pointsForDestroying = 5;
 
-    public float Damage => damage;
+    public int Damage => damage;
 
     public int PointsForDestroying => pointsForDestroying;
 }
