@@ -11,13 +11,15 @@ namespace Game.Gameplay
         [Zenject.Inject] private InputController inputCtrl = null;
 
         //TODO: STRONG TYPING!
-        private PlayerStats playerStats => (PlayerStats)stats;
+        private PlayerStats playerStats => (PlayerStats)Stats;
 
         //debug hax
         private bool godMode = false;
 
         protected override void Initialize()
         {
+            Stats = unitDefinitionsProvider.Player.Stats;
+
             base.Initialize();
 
             inputCtrl.GodModePressed += SwitchGodMode;
@@ -33,7 +35,7 @@ namespace Game.Gameplay
             }
             else
             {
-                spriteRenderer.SetEmission(stats.Color);
+                spriteRenderer.SetEmission(playerStats.Color);
             }
         }
 
@@ -78,9 +80,9 @@ namespace Game.Gameplay
                 new Projectile.SpawnContext(
                     transform.position,
                     this,
-                    stats.BaseProjectileSpeed,
+                    playerStats.BaseProjectileSpeed,
                     Vector3.up,
-                    stats.Color
+                    playerStats.Color
                 ));
         }
 
@@ -104,11 +106,11 @@ namespace Game.Gameplay
         private void OnValidate()
         {
             //TODO: strong typing
-            if (stats != null)
+            if (Stats != null)
             {
                 if (playerStats == null)
                 {
-                    stats = null;
+                    Stats = null;
                     UnityEditor.EditorUtility.SetDirty(this);
                 }
             }

@@ -4,10 +4,10 @@ namespace Game.Gameplay
 {
     public class UnitDefinitionsProvider : MonoBehaviour
     {
-        [SerializeField] UnitDefinition player = null;
-        [SerializeField] UnitDefinition enemy = null;
+        [SerializeField] private UnitDefinition player = null;
+        [SerializeField] private UnitDefinition basicEnemy = null;
 
         public UnitDefinition Player => player;
-        public UnitDefinition Enemy => enemy;
+        public UnitDefinition BasicEnemy => basicEnemy;
     }
 }

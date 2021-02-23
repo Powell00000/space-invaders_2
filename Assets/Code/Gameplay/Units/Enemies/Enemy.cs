@@ -6,21 +6,31 @@ namespace Game.Gameplay
     public class Enemy : Unit, IPoolable<Enemy.SpawnContext, EnemyPool>
     {
         //TODO: helper?
-        [Inject] ProjectilesPool projectilePool = null;
+        [Inject] private ProjectilesPool projectilePool = null;
 
         //TODO: STRONG TYPING
-        private EnemyStats enemyStats => (EnemyStats)stats;
+        private EnemyStats enemyStats => (EnemyStats)Stats;
 
-        EnemyPool enemyPool;
+        private EnemyPool enemyPool;
 
         private SpawnContext context;
 
         public System.Action<Enemy> OnPooled;
 
+        protected override void Initialize()
+        {
+            Stats = unitDefinitionsProvider.BasicEnemy.Stats;
+
+            base.Initialize();
+        }
+
         public void OnDespawned()
         {
             if (OnPooled != null)
+            {
                 OnPooled(this);
+            }
+
             ClearEvents();
         }
 
@@ -35,9 +45,9 @@ namespace Game.Gameplay
             projectilePool.Spawn(new Projectile.SpawnContext(
                 transform.position,
                 this,
-                stats.BaseProjectileSpeed,
+                enemyStats.BaseProjectileSpeed,
                 -Vector3.up,
-                stats.Color
+                enemyStats.Color
             ));
         }
 
@@ -88,9 +98,9 @@ namespace Game.Gameplay
 
         public struct SpawnContext
         {
-            GridArea.Cell cell;
-            Vector3 position;
-            EnemyDeathFxPool deathFxPool;
+            private GridArea.Cell cell;
+            private Vector3 position;
+            private EnemyDeathFxPool deathFxPool;
 
             public Vector3 Position => position;
             public GridArea.Cell Cell => cell;
@@ -108,11 +118,11 @@ namespace Game.Gameplay
         private void OnValidate()
         {
             //TODO: this is NOT strong typing; create custom inspector or so
-            if (stats != null)
+            if (Stats != null)
             {
                 if (enemyStats == null)
                 {
-                    stats = null;
+                    Stats = null;
                     UnityEditor.EditorUtility.SetDirty(this);
                 }
             }
