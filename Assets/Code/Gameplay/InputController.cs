@@ -53,6 +53,9 @@ namespace Game.Gameplay
                 #endregion
 
 #if !UNITY_EDITOR && (UNITY_ANDROID || UNITY_IOS)
+                fire = Input.touchCount == 2;
+                if(fire)
+                return;
                 float screenMiddle = Screen.width / 2;
                 var isTouching = Input.GetMouseButton(0);
                 if (isTouching)
@@ -76,7 +79,6 @@ namespace Game.Gameplay
                     horizontal = 0;
                 }
 
-                fire = Input.touchCount == 2;
 #else
                 horizontal = Input.GetAxisRaw("Horizontal");
                 fire = Input.GetButtonDown("Fire1");

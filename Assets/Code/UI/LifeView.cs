@@ -11,6 +11,7 @@ namespace Assets.Code.UI
         private void OnEnable()
         {
             playerController.OnPlayerHit += OnPlayerHit;
+            RefreshLabel();
         }
 
         private void OnDisable()
@@ -19,6 +20,11 @@ namespace Assets.Code.UI
         }
 
         private void OnPlayerHit()
+        {
+            RefreshLabel();
+        }
+
+        private void RefreshLabel()
         {
             livesLabel.text = $"x{playerController.LivesLeft}";
         }

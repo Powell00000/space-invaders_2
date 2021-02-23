@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e85cb22a81f183349a9a1b8f05dbb575, type: 3}
   m_Name: Player Stats
   m_EditorClassIdentifier: 
-  health: 1
+  hitsTillDeath: 3
   pointsForDestroying: 10
   color: {r: 1, g: 0.89338535, b: 0, a: 1}
   baseProjectileSpeed: 12
