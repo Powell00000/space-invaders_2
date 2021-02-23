@@ -10,8 +10,14 @@ PrefabInstance:
     - target: {fileID: 214211796999913071, guid: 5755e38e02a2775449946223e906497b,
         type: 3}
       propertyPath: cellsCount
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 214211796999913071, guid: 5755e38e02a2775449946223e906497b,
+        type: 3}
+      propertyPath: overrideEnemyStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 508152229ed73634e9ebcd4c2a5bfd20,
+        type: 2}
     - target: {fileID: 3182056130128972970, guid: 5755e38e02a2775449946223e906497b,
         type: 3}
       propertyPath: m_Name
@@ -84,8 +90,14 @@ PrefabInstance:
     - target: {fileID: 214211796999913071, guid: 5755e38e02a2775449946223e906497b,
         type: 3}
       propertyPath: cellsCount
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 214211796999913071, guid: 5755e38e02a2775449946223e906497b,
+        type: 3}
+      propertyPath: overrideEnemyStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 17650f515b2315049be4e047f178225d,
+        type: 2}
     - target: {fileID: 3182056130128972970, guid: 5755e38e02a2775449946223e906497b,
         type: 3}
       propertyPath: m_Name
@@ -158,8 +170,14 @@ PrefabInstance:
     - target: {fileID: 214211796999913071, guid: 5755e38e02a2775449946223e906497b,
         type: 3}
       propertyPath: cellsCount
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 214211796999913071, guid: 5755e38e02a2775449946223e906497b,
+        type: 3}
+      propertyPath: overrideEnemyStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 468b6586b60ea484a854231cefe3e010,
+        type: 2}
     - target: {fileID: 3182056130128972970, guid: 5755e38e02a2775449946223e906497b,
         type: 3}
       propertyPath: m_Name
@@ -307,8 +325,14 @@ PrefabInstance:
     - target: {fileID: 214211796999913071, guid: 5755e38e02a2775449946223e906497b,
         type: 3}
       propertyPath: cellsCount
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 214211796999913071, guid: 5755e38e02a2775449946223e906497b,
+        type: 3}
+      propertyPath: overrideEnemyStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 67603d7ed66901b4fbebc4dc0c690828,
+        type: 2}
     - target: {fileID: 3182056130128972970, guid: 5755e38e02a2775449946223e906497b,
         type: 3}
       propertyPath: m_Name

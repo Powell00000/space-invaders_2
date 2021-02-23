@@ -5,24 +5,26 @@ namespace Game.Gameplay
     //here we have logic for Grid and Cells for enemies to occupy and move with
     public class GridArea : MonoBehaviour
     {
-        [SerializeField, Range(1, 20)] float rowWidth = 10;
+        [SerializeField, Range(1, 20)] private float rowWidth = 10;
         //how many enemies there will be in a row
-        [SerializeField, Range(1, 8)] int cellsCount = 4;
-        [SerializeField] BoxCollider2D boxCol2D = null;
+        [SerializeField, Range(1, 12)] private int cellsCount = 4;
+        [SerializeField] private BoxCollider2D boxCol2D = null;
 
-        [Zenject.Inject] GameplayController gameplay = null;
+        [SerializeField, Tooltip("Override default enemy unit stats here.")] private EnemyStats overrideEnemyStats;
 
-        Bounds gridBounds;
-        public Bounds GridBounds => gridBounds;
+        [Zenject.Inject] private GameplayController gameplay = null;
+        private Bounds gridBounds;
 
-        float GridSizeX => boxCol2D.size.x * transform.localScale.x;
-        float CellSize => GridSizeX / cellsCount;
-
+        private float GridSizeX => boxCol2D.size.x * transform.localScale.x;
+        private float CellSize => GridSizeX / cellsCount;
         //offset for positioning next Cell
-        Vector3 VectorOffset => transform.right * CellSize;
+        private Vector3 VectorOffset => transform.right * CellSize;
+        private Cell[] cells;
 
-        Cell[] cells;
+        public Bounds GridBounds => gridBounds;
         public int CellsCount => cellsCount;
+        public Cell[] Cells => cells;
+        public EnemyStats OverrideEnemyStats => overrideEnemyStats;
 
         public void Initialize()
         {
@@ -31,7 +33,7 @@ namespace Game.Gameplay
             BakeCells();
         }
 
-        void BakeCells()
+        private void BakeCells()
         {
             cells = new Cell[CellsCount];
             Vector3 cellPosition = transform.position - transform.right * GridSizeX / 2 + VectorOffset / 2;
@@ -78,13 +80,15 @@ namespace Game.Gameplay
         public void OnDestroy()
         {
             if (gameplay)
+            {
                 gameplay.OnLevelRestarting -= ClearCells;
+            }
         }
 
         public class Cell
         {
-            Transform worldTransform;
-            Unit occupant;
+            private Transform worldTransform;
+            private Unit occupant;
 
             public Transform WorldTransform => worldTransform;
             public Unit Occupant => occupant;
@@ -94,9 +98,13 @@ namespace Game.Gameplay
                 get
                 {
                     if (occupant == null)
+                    {
                         return false;
+                    }
                     else
+                    {
                         return true;
+                    }
                 }
             }
 
@@ -112,7 +120,7 @@ namespace Game.Gameplay
                 this.occupant.OnDeath += FreeCell;
             }
 
-            void FreeCell(Unit deadUnit)
+            private void FreeCell(Unit deadUnit)
             {
                 occupant = null;
             }
@@ -134,7 +142,9 @@ namespace Game.Gameplay
         {
             transform.localScale = Vector3.one;
             if (boxCol2D)
+            {
                 boxCol2D.size = new Vector2(rowWidth, 1);
+            }
         }
 #endif
     }

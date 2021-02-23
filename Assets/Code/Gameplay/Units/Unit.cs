@@ -1,16 +1,17 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Gameplay
 {
     public abstract class Unit : MonoBehaviour, IUnit
     {
         //TODO: create system for updating units during gameplay state
-        [Zenject.Inject] private GameplayController gameplayCtrl = null;
+        [Inject] private GameplayController gameplayCtrl = null;
+        [Inject] private DiContainer container;
+        [Inject] protected UnitDefinitionsProvider unitDefinitionsProvider = null;
 
         [SerializeField] protected BoxCollider2D boxCollider2d = null;
-        //TODO: strong typing
-        [SerializeField] protected UnitStats stats = null;
         [SerializeField] protected SpriteRenderer spriteRenderer = null;
 
         protected float currentHealth;
@@ -21,7 +22,8 @@ namespace Game.Gameplay
         public Action<Unit> OnDeath;
 
         public BoxCollider2D BoxCollider2D => boxCollider2d;
-        public UnitStats Stats => stats;
+        //TODO: strong typing
+        public UnitStats Stats { get; protected set; }
         public float CurrentHealth => currentHealth;
 
         EFaction IUnit.Faction => faction;
@@ -40,16 +42,17 @@ namespace Game.Gameplay
 
         private void Start()
         {
+            container.Inject(this);
             //just to be sure
-            Initialize();
+            //Initialize();
         }
 
         protected virtual void Initialize()
         {
-            currentHealth = stats.Health;
+            currentHealth = Stats.Health;
 
-            spriteRenderer.color = stats.Color;
-            shootMaxTime = stats.ShootTime;
+            spriteRenderer.color = Stats.Color;
+            shootMaxTime = Stats.ShootTime;
             shootTimer = 0;
         }
 

@@ -1,51 +1,54 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Game.Gameplay
 {
     //no pooling, we die like real men
     public class PlayerController
     {
-        [Zenject.Inject] UnitDefinitionsProvider unitDefProvider = null;
-        [Zenject.Inject] PlayableArea playableArea = null;
+        [Inject] private UnitDefinitionsProvider unitDefProvider = null;
+        [Inject] private PlayableArea playableArea = null;
 
         public System.Action OnPlayerDied;
 
         public Vector3 PlayerPosition => spawnedPlayer.transform.position;
 
-        Player spawnedPlayer;
+        private Player spawnedPlayer;
 
         public void MaintainPlayerSpawn()
         {
             DespawnPlayer();
-            spawnedPlayer = GameObject.Instantiate(unitDefProvider.Player.Prefab) as Player;
+            spawnedPlayer = Object.Instantiate(unitDefProvider.Player.Prefab) as Player;
 
             spawnedPlayer.transform.position = playableArea.PlayerSpawnPosition;
 
             ConnectEvents();
         }
 
-        void ConnectEvents()
+        private void ConnectEvents()
         {
             spawnedPlayer.OnDamageReceived += PlayerReceivedDamage;
             spawnedPlayer.OnDeath += PlayerDied;
         }
 
-        void DisconnectEvents()
+        private void DisconnectEvents()
         {
             spawnedPlayer.OnDamageReceived -= PlayerReceivedDamage;
             spawnedPlayer.OnDeath -= PlayerDied;
         }
 
-        void PlayerReceivedDamage()
+        private void PlayerReceivedDamage()
         {
 
         }
 
-        void PlayerDied(Unit deadUnit)
+        private void PlayerDied(Unit deadUnit)
         {
             DespawnPlayer();
             if (OnPlayerDied != null)
+            {
                 OnPlayerDied();
+            }
         }
 
         public void DespawnPlayer()

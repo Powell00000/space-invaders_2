@@ -8,7 +8,6 @@ namespace Assets.Code.Gameplay.Units.Enemies
         [Zenject.Inject] private WaveManagerBase waveManager = null;
         [Zenject.Inject] private EnemyPool enemyPool = null;
         //[Zenject.Inject] private MiniBossPool miniBossPool = null;
-        [Zenject.Inject] private PlayableArea playableArea = null;
         [Zenject.Inject] private EnemyDeathFxPool enemyDeathFxPool = null;
 
         public override void Initialize()
@@ -21,22 +20,20 @@ namespace Assets.Code.Gameplay.Units.Enemies
             //we take grids setup from Grid parent
             foreach (var gridArea in currentWave.SpawnedGridParent.Grids)
             {
+                EnemyStats enemyStats = gridArea.OverrideEnemyStats;
+
                 //for every cell in GridArea in GridParent
                 for (int i = 0; i < gridArea.CellsCount; i++)
                 {
-                    bool hasFreeCell = gridArea.TryGetFreeCell(out var cell);
+                    var cell = gridArea.Cells[i];
+                    var spawnContext = new Enemy.SpawnContext(cell.WorldTransform.position, cell, enemyDeathFxPool, enemyStats);
+                    var spawnedEnemy = enemyPool.Spawn(spawnContext);
 
-                    if (hasFreeCell)
+                    cell.OccupyCell(spawnedEnemy);
+
+                    if (OnEnemySpawned != null)
                     {
-                        var spawnContext = new Enemy.SpawnContext(cell.WorldTransform.position, cell, enemyDeathFxPool);
-                        var spawnedEnemy = enemyPool.Spawn(spawnContext);
-
-                        cell.OccupyCell(spawnedEnemy);
-
-                        if (OnEnemySpawned != null)
-                        {
-                            OnEnemySpawned(spawnedEnemy);
-                        }
+                        OnEnemySpawned(spawnedEnemy);
                     }
                 }
             }

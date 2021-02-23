@@ -7,19 +7,18 @@ namespace Game.Gameplay
     public class MiniBoss : Unit, IPoolable<MiniBoss.SpawnContext, MiniBossPool>
     {
         //TODO: rework
-        [Inject] PlayableArea playableArea = null;
-        [Inject] ProjectilesPool projectilePool = null;
+        [Inject] private PlayableArea playableArea = null;
+        [Inject] private ProjectilesPool projectilePool = null;
 
         //Maybe some sensors for finding player?
-        [Inject] PlayerController playerCtrl = null;
-
-        MiniBossPool pool;
-        SpawnContext context;
+        [Inject] private PlayerController playerCtrl = null;
+        private MiniBossPool pool;
+        private SpawnContext context;
 
         //TODO: STRONG TYPING!
-        private EnemyStats enemyStats => (EnemyStats)stats;
+        private EnemyStats enemyStats => (EnemyStats)Stats;
 
-        Vector3 moveTargetPosition;
+        private Vector3 moveTargetPosition;
 
         public void OnDespawned()
         {
@@ -45,9 +44,9 @@ namespace Game.Gameplay
             projectilePool.Spawn(new Projectile.SpawnContext(
                    transform.position,
                    this,
-                   stats.BaseProjectileSpeed,
+                   enemyStats.BaseProjectileSpeed,
                    dirToPlayer,
-                   stats.Color
+                   enemyStats.Color
                ));
         }
 
@@ -83,7 +82,7 @@ namespace Game.Gameplay
         }
 
         //our miniboss moves outside Grid, quasi-randomly
-        void RandomizeTargetPosition()
+        private void RandomizeTargetPosition()
         {
             Vector3 randomInSphere = Random.insideUnitSphere.WithZ(0);
             randomInSphere *= playableArea.PlayableHeight;
@@ -92,8 +91,8 @@ namespace Game.Gameplay
 
         public struct SpawnContext
         {
-            Vector3 position;
-            EnemyDeathFxPool deathFxPool;
+            private Vector3 position;
+            private EnemyDeathFxPool deathFxPool;
 
             public Vector3 Position => position;
 
