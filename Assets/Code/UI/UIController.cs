@@ -6,34 +6,44 @@ namespace Game.UI
     //Controlls visibility of views
     public class UIController : MonoBehaviour, Zenject.IInitializable, System.IDisposable
     {
-        [Zenject.Inject] GameplayController gameplayCtrl = null;
+        [Zenject.Inject] private GameplayController gameplayCtrl = null;
 
         //TODO: REWORK to base class GUIView
-        [SerializeField] GameObject warmup = null;
-        [SerializeField] GameObject gameplay = null;
-        [SerializeField] GameObject gameOver = null;
+        [SerializeField] private GameObject warmup = null;
+        [SerializeField] private GameObject gameplay = null;
+        [SerializeField] private GameObject gameOver = null;
 
         public void Initialize()
         {
             gameplayCtrl.OnStateChanged += GameStateChanged;
+            //gameplayCtrl.OnLevelRestarting += LevelRestarting;
         }
 
-        void Start()
+        private void Start()
         {
             GameStateChanged(gameplayCtrl.CurrentGameplayState);
         }
 
-        void GameStateChanged(EGameplayState state)
+        private void GameStateChanged(EGameplayState state)
         {
             warmup.SetActive(gameplayCtrl.CurrentGameplayState == EGameplayState.Warmup);
             gameplay.SetActive(gameplayCtrl.CurrentGameplayState == EGameplayState.Playing);
             gameOver.SetActive(gameplayCtrl.CurrentGameplayState == EGameplayState.GameOver);
         }
 
+        private void LevelRestarting()
+        {
+            warmup.SetActive(false);
+            gameplay.SetActive(false);
+            gameOver.SetActive(false);
+        }
+
         public void Dispose()
         {
             if (gameplayCtrl != null)
+            {
                 gameplayCtrl.OnStateChanged -= GameStateChanged;
+            }
         }
     }
 }
