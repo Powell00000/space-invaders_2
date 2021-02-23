@@ -1,9 +1,10 @@
-﻿using Assets.Code.Gameplay.Waves;
+﻿using Assets.Code.Gameplay.Units.Enemies;
+using Assets.Code.Gameplay.Waves;
 using UnityEngine;
 
 namespace Game.Gameplay
 {
-    public class EnemySpawner : Zenject.IInitializable, System.IDisposable
+    public class EnemySpawner : EnemySpawnerBase
     {
         //TODO: too many dependencies?
         [Zenject.Inject] private WaveManagerBase waveManager = null;
@@ -12,18 +13,17 @@ namespace Game.Gameplay
         [Zenject.Inject] private PlayableArea playableArea = null;
         [Zenject.Inject] private EnemyDeathFxPool enemyDeathFxPool = null;
 
-        public System.Action<Unit> OnEnemySpawned;
         private Vector3 spawnOffset;
         private Vector3 targetPosOnArc;
 
-        public void Initialize()
+        public override void Initialize()
         {
             //wave manager tells us when to spawn new enemies
             waveManager.OnWaveTriggered += SpawnEnemies;
             spawnOffset = Vector3.up * playableArea.Width / 1.5f;
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             waveManager.OnWaveTriggered -= SpawnEnemies;
         }

@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Assets.Code.Gameplay.Units.Enemies;
+using System;
 
 namespace Game.Gameplay
 {
     //keeping track of points
     public class PointsManager : Zenject.IInitializable, IDisposable
     {
-        [Zenject.Inject] EnemySpawner enemySpawner = null;
-        [Zenject.Inject] GameplayController gameplayCtrl = null;
-
-        int currentPoints;
+        [Zenject.Inject] private EnemySpawnerBase enemySpawner = null;
+        [Zenject.Inject] private GameplayController gameplayCtrl = null;
+        private int currentPoints;
         public Action<int> OnPointsChanged;
 
         public int CurrentPoints => currentPoints;
@@ -20,22 +20,22 @@ namespace Game.Gameplay
             ClearPoints();
         }
 
-        void EnemySpawned(Unit unit)
+        private void EnemySpawned(Unit unit)
         {
             unit.OnDeath += OnUnitDeath;
         }
 
-        void OnUnitDeath(Unit deadUnit)
+        private void OnUnitDeath(Unit deadUnit)
         {
             AddPoints(deadUnit.Stats.PointsForDestroying);
         }
 
-        void ClearPoints()
+        private void ClearPoints()
         {
             SetPoints(0);
         }
 
-        void SetPoints(int newValue)
+        private void SetPoints(int newValue)
         {
             currentPoints = newValue;
             RaisePointsChangedEvent();
@@ -46,19 +46,25 @@ namespace Game.Gameplay
             SetPoints(currentPoints + amount);
         }
 
-        void RaisePointsChangedEvent()
+        private void RaisePointsChangedEvent()
         {
             if (OnPointsChanged != null)
+            {
                 OnPointsChanged(currentPoints);
+            }
         }
 
         void IDisposable.Dispose()
         {
             if (enemySpawner != null)
+            {
                 enemySpawner.OnEnemySpawned -= EnemySpawned;
+            }
 
             if (gameplayCtrl != null)
+            {
                 gameplayCtrl.OnLevelStarting -= ClearPoints;
+            }
         }
     }
 }

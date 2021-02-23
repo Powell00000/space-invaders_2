@@ -1,4 +1,5 @@
-﻿using Assets.Code.Gameplay.Waves;
+﻿using Assets.Code.Gameplay.Units.Enemies;
+using Assets.Code.Gameplay.Waves;
 using UnityEngine;
 using Zenject;
 
@@ -21,14 +22,17 @@ namespace Game.Gameplay
             Container.Bind<PlayableArea>().FromInstance(playableArea);
             Container.Bind<UnitDefinitionsProvider>().FromInstance(unitDefinitionsProvider);
 
+            var enemySpawner = new EnemySpawner();
+            Container.BindInterfacesAndSelfTo<EnemySpawnerBase>().FromInstance(enemySpawner);
+            Container.QueueForInject(enemySpawner);
+
             Container.BindInterfacesAndSelfTo<GlobalShootingAI>().AsSingle();
             Container.BindInterfacesAndSelfTo<PointsManager>().AsSingle();
-
             Container.BindInterfacesAndSelfTo<PoolsController>().AsSingle();
             Container.BindInterfacesAndSelfTo<WaveProgressController>().AsSingle();
-            Container.BindInterfacesAndSelfTo<EnemySpawner>().AsSingle();
             Container.BindInterfacesAndSelfTo<WaveManagerBase>().FromInstance(waveManager);
             Container.BindInterfacesAndSelfTo<GameplayController>().FromInstance(gameplayController);
+
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Assets.Code.Gameplay.Units.Enemies;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 using Zenject;
 
 namespace Game.Gameplay
@@ -8,18 +8,17 @@ namespace Game.Gameplay
     //here we manage the wave progression, so keeping track of spawned and destroyed enemies
     public class WaveProgressController : IInitializable, IDisposable
     {
-        [Inject] EnemySpawner enemySpawner = null;
-        [Inject] InputController inputCtrl = null;
-        [Inject] GameplayController gameplayCtrl = null;
+        [Inject] private EnemySpawnerBase enemySpawner = null;
+        [Inject] private InputController inputCtrl = null;
+        [Inject] private GameplayController gameplayCtrl = null;
 
         public Action OnWaveFinished;
-
-        List<Unit> aliveEnemies;
+        private List<Unit> aliveEnemies;
 
         //TODO: should it be public?
         public List<Unit> AliveEnemies => aliveEnemies;
 
-        int aliveEnemiesCount => aliveEnemies.Count;
+        private int aliveEnemiesCount => aliveEnemies.Count;
 
         void IInitializable.Initialize()
         {
@@ -32,7 +31,7 @@ namespace Game.Gameplay
         }
 
         //TODO: memory management
-        void DespawnAliveEnemies()
+        private void DespawnAliveEnemies()
         {
             //we cannot operate on aliveEnemies, because there are already spawning new enemies and collection changes
             List<Unit> tmp = new List<Unit>(aliveEnemies);
@@ -44,12 +43,12 @@ namespace Game.Gameplay
             tmp = null;
         }
 
-        void ClearList()
+        private void ClearList()
         {
             aliveEnemies.Clear();
         }
 
-        void OnEnemyDeath(Unit deadUnit)
+        private void OnEnemyDeath(Unit deadUnit)
         {
             var enemy = deadUnit;
             aliveEnemies.Remove(enemy);
@@ -57,11 +56,13 @@ namespace Game.Gameplay
             if (aliveEnemiesCount == 0)
             {
                 if (OnWaveFinished != null)
+                {
                     OnWaveFinished();
+                }
             }
         }
 
-        void OnEnemySpawned(Unit spawnedUnit)
+        private void OnEnemySpawned(Unit spawnedUnit)
         {
             var enemy = spawnedUnit;
             aliveEnemies.Add(enemy);
@@ -72,12 +73,19 @@ namespace Game.Gameplay
         void IDisposable.Dispose()
         {
             if (enemySpawner != null)
+            {
                 enemySpawner.OnEnemySpawned -= OnEnemySpawned;
-            if (inputCtrl != null)
-                inputCtrl.KillAllEnemies -= DespawnAliveEnemies;
-            if (gameplayCtrl != null)
-                gameplayCtrl.OnLevelRestarting -= ClearList;
+            }
 
+            if (inputCtrl != null)
+            {
+                inputCtrl.KillAllEnemies -= DespawnAliveEnemies;
+            }
+
+            if (gameplayCtrl != null)
+            {
+                gameplayCtrl.OnLevelRestarting -= ClearList;
+            }
         }
     }
 }
