@@ -6,14 +6,14 @@ namespace Game.Gameplay
     //also translates positions
     public class GridParent : MonoBehaviour
     {
-        [Zenject.Inject] PlayableArea playableArea = null;
+        [Zenject.Inject] private GameplayController gameplayController;
+        [Zenject.Inject] private PlayableArea playableArea = null;
 
-        [SerializeField] GridArea[] grids;
+        [SerializeField] private GridArea[] grids;
+        private Bounds parentBounds;
+        private int rowMovementDirection = 1;
 
-        Bounds parentBounds;
-
-        int rowMovementDirection = 1;
-        float maxXPosOffset => playableArea.Width / 2;
+        private float maxXPosOffset => playableArea.Width / 2;
 
         public GridArea[] Grids
         {
@@ -21,14 +21,17 @@ namespace Game.Gameplay
             {
                 //proofcheck
                 if (grids == null || grids.Length == 0)
+                {
                     GetGrids();
+                }
+
                 return grids;
             }
         }
 
         //for runtime optimalization
         [ContextMenu("Get grids")]
-        void GetGrids()
+        private void GetGrids()
         {
             grids = GetComponentsInChildren<GridArea>();
         }
@@ -44,13 +47,23 @@ namespace Game.Gameplay
 
         private void Update()
         {
+            if (gameplayController.CurrentGameplayState != EGameplayState.Playing)
+            {
+                return;
+            }
             //we encapsulated all bounds, so now we need to move from left to right and keep inside game view
             var offsetedXPosition = transform.position.x + rowMovementDirection * (parentBounds.size.x / 2);
 
             if (offsetedXPosition >= maxXPosOffset)
+            {
                 rowMovementDirection = -1;
+            }
+
             if (offsetedXPosition <= -maxXPosOffset)
+            {
                 rowMovementDirection = 1;
+            }
+
             transform.position += Vector3.right * rowMovementDirection * Time.deltaTime * 2; //AHA! floating forgotten conts! should be in stats as speed
         }
     }

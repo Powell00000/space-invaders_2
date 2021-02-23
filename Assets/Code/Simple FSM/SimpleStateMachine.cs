@@ -1,5 +1,5 @@
 ﻿#if UNITY_EDITOR
-//    #define TEST_FSM
+//#define TEST_FSM
 #endif
 
 using System;
@@ -17,40 +17,51 @@ public class SimpleStateMachine<T>
 
     public T CurrentState { get; private set; }
 
-    public SimpleStateMachine( T initialState, Action<T> OnStateEnterFunc = null )
+    public SimpleStateMachine(T initialState, Action<T> OnStateEnterFunc = null)
     {
         CurrentState = initialState;
 
         UninitializedState = initialState;
         CurrentState = initialState;
 
-        if( OnStateEnterFunc != null )
+        if (OnStateEnterFunc != null)
+        {
             OnStateEnter += OnStateEnterFunc;
-        if( OnStateEnter != null )
-            OnStateEnter( CurrentState );
+        }
+
+        if (OnStateEnter != null)
+        {
+            OnStateEnter(CurrentState);
+        }
     }
 
-    public T ChangeState( T stateNew )
+    public T ChangeState(T stateNew)
     {
 #if TEST_FSM
-        Debug.LogFormat( "FSM {0} -> {1}\nOnStateTransition:{2}", CurrentState, stateNew, OnStateTransition.GetInvocationList().Print() );
+        Debug.LogFormat("FSM {0} -> {1}\n", CurrentState, stateNew);
 #endif
 
-        if( CurrentState.Equals( stateNew ) )
+        if (CurrentState.Equals(stateNew))
         {
             return CurrentState;
         }
 
-        if( OnStateExit != null )
-            OnStateExit( CurrentState );
+        if (OnStateExit != null)
+        {
+            OnStateExit(CurrentState);
+        }
 
-        if( OnStateTransition != null )
-            OnStateTransition( CurrentState, stateNew );
+        if (OnStateTransition != null)
+        {
+            OnStateTransition(CurrentState, stateNew);
+        }
 
         CurrentState = stateNew;
 
-        if( OnStateEnter != null )
-            OnStateEnter( stateNew );
+        if (OnStateEnter != null)
+        {
+            OnStateEnter(stateNew);
+        }
 
         return stateNew;
     }

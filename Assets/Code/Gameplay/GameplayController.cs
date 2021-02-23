@@ -8,11 +8,12 @@ namespace Game.Gameplay
     //gives lots of events for other systems
     public class GameplayController : MonoBehaviour, IInitializable, IDisposable
     {
-        [Inject] PlayerController playerCtrl = null;
-        [Inject] WaveManager waveManager = null;
-        [Inject] InputController inputCtrl = null;
+        [Inject] private PlayerController playerCtrl = null;
+        [Inject] private WaveManager waveManager = null;
+        [Inject] private InputController inputCtrl = null;
+        [Inject] private PlayableArea gameBounds = null;
 
-        GameplayStateMachine gameplayState;
+        private GameplayStateMachine gameplayState;
         public Action OnLevelStarting;
         public Action OnLevelRestarting;
         public Action<EGameplayState> OnStateChanged;
@@ -20,7 +21,7 @@ namespace Game.Gameplay
         public EGameplayState CurrentGameplayState => gameplayState.CurrentState;
 
         //wait for a moment for game start
-        MEC.CoroutineHandle warmupCoroutineHandle;
+        private MEC.CoroutineHandle warmupCoroutineHandle;
 
         void IInitializable.Initialize()
         {
@@ -31,6 +32,7 @@ namespace Game.Gameplay
             waveManager.OnAllWavesFinished += GameOver;
             inputCtrl.Restart += Restart;
 
+            gameBounds.CalculateBounds();
             Warmup();
         }
 
@@ -48,16 +50,22 @@ namespace Game.Gameplay
             gameplayState.ChangeState(EGameplayState.Playing);
 
             if (OnLevelStarting != null)
+            {
                 OnLevelStarting();
+            }
         }
 
         public void Restart()
         {
             if (CurrentGameplayState == EGameplayState.Warmup)
+            {
                 return;
+            }
 
             if (OnLevelRestarting != null)
+            {
                 OnLevelRestarting();
+            }
 
             Warmup();
         }
@@ -68,20 +76,30 @@ namespace Game.Gameplay
             gameplayState.ChangeState(EGameplayState.GameOver);
         }
 
-        void StateChanged(EGameplayState state)
+        private void StateChanged(EGameplayState state)
         {
             if (OnStateChanged != null)
+            {
                 OnStateChanged(state);
+            }
         }
 
         public void Dispose()
         {
             if (playerCtrl != null)
+            {
                 playerCtrl.OnPlayerDied -= GameOver;
+            }
+
             if (waveManager != null)
+            {
                 waveManager.OnAllWavesFinished += GameOver;
+            }
+
             if (inputCtrl != null)
+            {
                 inputCtrl.Restart += Restart;
+            }
         }
     }
 }
