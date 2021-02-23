@@ -43,8 +43,6 @@ namespace Game.Gameplay
         private void Start()
         {
             container.Inject(this);
-            //just to be sure
-            //Initialize();
         }
 
         protected virtual void Initialize()

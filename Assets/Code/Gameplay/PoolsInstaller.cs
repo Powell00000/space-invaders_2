@@ -1,22 +1,23 @@
-﻿using UnityEngine;
+﻿using Assets.Code.Gameplay.Units.Shield;
+using UnityEngine;
 
 namespace Game.Gameplay
 {
     public class PoolsInstaller : Zenject.MonoInstaller
     {
-        [SerializeField] Projectile projectilePrefab = null;
-        [SerializeField] ProjectileHitFx projectileHitPrefab = null;
-        [SerializeField] Enemy enemyPrefab = null;
-        [SerializeField] MiniBoss miniBossPrefab = null;
-        [SerializeField] EnemyDeathFx enemyDeathFxPrefab = null;
+        [SerializeField] private Projectile projectilePrefab = null;
+        [SerializeField] private ProjectileHitFx projectileHitPrefab = null;
+        [SerializeField] private Enemy enemyPrefab = null;
+        [SerializeField] private MiniBoss miniBossPrefab = null;
+        [SerializeField] private EnemyDeathFx enemyDeathFxPrefab = null;
+        [SerializeField] private ShieldBrick shieldBrickPrefab = null;
 
-        static readonly int projectilesPoolSize = 200;
-        static readonly int projectilesHitPoolSize = projectilesPoolSize;
-
-        static readonly int enemyPoolSize = 40;
-        static readonly int enemyDeathFxPoolSize = enemyPoolSize;
-
-        static readonly int minibossPoolSize = 4;
+        private static readonly int projectilesPoolSize = 200;
+        private static readonly int projectilesHitPoolSize = projectilesPoolSize;
+        private static readonly int enemyPoolSize = 40;
+        private static readonly int enemyDeathFxPoolSize = enemyPoolSize;
+        private static readonly int minibossPoolSize = 4;
+        private static readonly int shieldBrickPoolSize = 50;
 
         public override void InstallBindings()
         {
@@ -44,6 +45,11 @@ namespace Game.Gameplay
                 .WithInitialSize(enemyDeathFxPoolSize)
                 .FromComponentInNewPrefab(enemyDeathFxPrefab)
                 .UnderTransformGroup("EnemyDeathFx");
+
+            Container.BindMemoryPool<ShieldBrick, ShieldBricksPool>()
+                .WithInitialSize(shieldBrickPoolSize)
+                .FromComponentInNewPrefab(shieldBrickPrefab)
+                .UnderTransformGroup("ShieldBricks");
         }
     }
 }
