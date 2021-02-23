@@ -96,7 +96,7 @@ namespace Game.Gameplay
             }
             else
             {
-                Debug.LogError($"{newPosition} position out of bounds");
+                //Debug.LogError($"{newPosition} position out of bounds");
             }
         }
 

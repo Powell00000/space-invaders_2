@@ -1,20 +1,20 @@
-﻿using UnityEngine;
+﻿using Assets.Code.Gameplay.Waves;
+using UnityEngine;
 
 namespace Game.Gameplay
 {
     public class EnemySpawner : Zenject.IInitializable, System.IDisposable
     {
         //TODO: too many dependencies?
-        [Zenject.Inject] WaveManager waveManager = null;
-        [Zenject.Inject] EnemyPool enemyPool = null;
-        [Zenject.Inject] MiniBossPool miniBossPool = null;
-        [Zenject.Inject] PlayableArea playableArea = null;
-        [Zenject.Inject] EnemyDeathFxPool enemyDeathFxPool = null;
+        [Zenject.Inject] private WaveManagerBase waveManager = null;
+        [Zenject.Inject] private EnemyPool enemyPool = null;
+        [Zenject.Inject] private MiniBossPool miniBossPool = null;
+        [Zenject.Inject] private PlayableArea playableArea = null;
+        [Zenject.Inject] private EnemyDeathFxPool enemyDeathFxPool = null;
 
         public System.Action<Unit> OnEnemySpawned;
-
-        Vector3 spawnOffset;
-        Vector3 targetPosOnArc;
+        private Vector3 spawnOffset;
+        private Vector3 targetPosOnArc;
 
         public void Initialize()
         {
@@ -28,17 +28,19 @@ namespace Game.Gameplay
             waveManager.OnWaveTriggered -= SpawnEnemies;
         }
 
-        void SpawnMiniBoss()
+        private void SpawnMiniBoss()
         {
             //random position on half sphere outside screen view
             targetPosOnArc = Quaternion.AngleAxis(Random.Range(-90f, 90f), Vector3.forward) * spawnOffset;
 
             var miniBoss = miniBossPool.Spawn(new MiniBoss.SpawnContext(targetPosOnArc, enemyDeathFxPool));
             if (OnEnemySpawned != null)
+            {
                 OnEnemySpawned(miniBoss);
+            }
         }
 
-        void SpawnEnemies(WaveManager.Wave currentWave)
+        private void SpawnEnemies(WaveManagerBase.Wave currentWave)
         {
             //spaghetti code 101
 
@@ -61,7 +63,9 @@ namespace Game.Gameplay
                         cell.OccupyCell(spawnedEnemy);
 
                         if (OnEnemySpawned != null)
+                        {
                             OnEnemySpawned(spawnedEnemy);
+                        }
                     }
                 }
             }
