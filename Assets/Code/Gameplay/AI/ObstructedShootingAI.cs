@@ -4,11 +4,12 @@ using Zenject;
 namespace Game.Gameplay
 {
     //Hive mind for enemies to maintain shooting
-    public class GlobalShootingAI : IInitializable, ITickable
+    public class ObstructedShootingAI : IInitializable, ITickable
     {
         //for list of alive enemies
         [Inject] private WaveProgressController waveProgressCtrl = null;
         [Inject] private GameplayController gameplayCtrl = null;
+
         private AnimationCurve enemiesCountToShootTime;
         private float timer;
         private float shootTime = 1f;
@@ -34,7 +35,7 @@ namespace Game.Gameplay
                 if (timer >= shootTime)
                 {
                     var randomEnemyIndex = Random.Range(0, waveProgressCtrl.AliveEnemies.Count);
-                    waveProgressCtrl.AliveEnemies[randomEnemyIndex].ShootIfCan();
+                    waveProgressCtrl.EnemiesAbleToShoot[randomEnemyIndex].ShootIfCan();
                     timer = Random.Range(0, shootTime);
                 }
             }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Code.Gameplay.Units;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Gameplay
@@ -9,14 +10,24 @@ namespace Game.Gameplay
         [Inject] private ProjectilesPool projectilePool = null;
 
         //TODO: STRONG TYPING
-        private EnemyStats enemyStats => (EnemyStats)Stats;
+        protected EnemyStats enemyStats => (EnemyStats)Stats;
+
         private EnemyPool enemyPool;
         private SpawnContext context;
         private int currentAnimationFrame;
         private const float animationDelay = 1f;
         private float animationTimeElapsed;
+        private bool isObstructed = false;
 
         public System.Action<Enemy> OnPooled;
+        public override bool CanShoot => base.CanShoot && !isObstructed;
+
+        protected override void Initialize()
+        {
+            animationTimeElapsed = 0;
+            isObstructed = false;
+            base.Initialize();
+        }
 
         public void OnDespawned()
         {
@@ -32,6 +43,7 @@ namespace Game.Gameplay
         {
             base.Update();
             Animate();
+            isObstructed = ObstructionChecker.IsObstructed(transform.position, Vector2.down, Layers.Bit.Enemy, 50);
         }
 
         private void Animate()
