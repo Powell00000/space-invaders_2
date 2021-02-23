@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad042a965dadfaf4e993aac8b7925c94, type: 3}
   m_Name: Enemy 4 Stats
   m_EditorClassIdentifier: 
-  health: 1
+  hitsTillDeath: 1
   pointsForDestroying: 10
-  color: {r: 0, g: 0.3833332, b: 1, a: 1}
+  color: {r: 1, g: 0, b: 0.8499999, a: 1}
   baseProjectileSpeed: 8
   shootTime: 1
   flySpeed: 10
   movementSpeed: 2
   animationFrames:
-  - {fileID: 7184986583935804710, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
-  - {fileID: -1191463368141114451, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -7611812954639256507, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -3732781224220902406, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
