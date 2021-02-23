@@ -1,4 +1,5 @@
-﻿using Assets.Code.Gameplay.Waves;
+﻿using Assets.Code.Gameplay;
+using Assets.Code.Gameplay.Waves;
 using System;
 using UnityEngine;
 using Zenject;
@@ -13,6 +14,7 @@ namespace Game.Gameplay
         [Inject] private WaveManagerBase waveManager = null;
         [Inject] private InputController inputCtrl = null;
         [Inject] private PlayableArea gameBounds = null;
+        [Inject] private GameplaySettings gameplaySettings = null;
 
         private GameplayStateMachine gameplayState;
         public Action OnLevelStarting;
@@ -20,6 +22,7 @@ namespace Game.Gameplay
         public Action<EGameplayState> OnStateChanged;
 
         public EGameplayState CurrentGameplayState => gameplayState.CurrentState;
+        public GameplaySettings GameplaySettings => gameplaySettings;
 
         //wait for a moment for game start
         private MEC.CoroutineHandle warmupCoroutineHandle;
