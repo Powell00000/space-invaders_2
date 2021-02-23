@@ -10,19 +10,13 @@ namespace Game.Gameplay
 
         //TODO: STRONG TYPING
         private EnemyStats enemyStats => (EnemyStats)Stats;
-
         private EnemyPool enemyPool;
-
         private SpawnContext context;
+        private int currentAnimationFrame;
+        private const float animationDelay = 1f;
+        private float animationTimeElapsed;
 
         public System.Action<Enemy> OnPooled;
-
-        protected override void Initialize()
-        {
-            Stats = unitDefinitionsProvider.BasicEnemy.Stats;
-
-            base.Initialize();
-        }
 
         public void OnDespawned()
         {
@@ -32,6 +26,32 @@ namespace Game.Gameplay
             }
 
             ClearEvents();
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            Animate();
+        }
+
+        private void Animate()
+        {
+            if (enemyStats.AnimationFrames == null || enemyStats.AnimationFrames.Length == 0)
+            {
+                return;
+            }
+
+            if (animationTimeElapsed >= animationDelay)
+            {
+                spriteRenderer.sprite = enemyStats.AnimationFrames[currentAnimationFrame];
+                animationTimeElapsed = 0;
+                currentAnimationFrame++;
+                if (currentAnimationFrame >= enemyStats.AnimationFrames.Length)
+                {
+                    currentAnimationFrame = 0;
+                }
+            }
+            animationTimeElapsed += Time.deltaTime;
         }
 
         protected override void ClearEvents()
@@ -53,13 +73,21 @@ namespace Game.Gameplay
 
         public void OnSpawned(SpawnContext spawnContext, EnemyPool enemyPool)
         {
-            Initialize();
-
             faction = EFaction.Enemy;
 
             context = spawnContext;
+            if (context.EnemyStats != null)
+            {
+                Stats = context.EnemyStats;
+            }
+            else
+            {
+                Stats = unitDefinitionsProvider.BasicEnemy.Stats;
+            }
+
             transform.position = spawnContext.Position;
             this.enemyPool = enemyPool;
+            Initialize();
         }
 
         protected override void Death()
@@ -101,16 +129,19 @@ namespace Game.Gameplay
             private GridArea.Cell cell;
             private Vector3 position;
             private EnemyDeathFxPool deathFxPool;
+            private EnemyStats enemyStats;
 
             public Vector3 Position => position;
             public GridArea.Cell Cell => cell;
             public EnemyDeathFxPool DeathFxPool => deathFxPool;
+            public EnemyStats EnemyStats => enemyStats;
 
-            public SpawnContext(Vector3 position, GridArea.Cell cell, EnemyDeathFxPool deathFxPool)
+            public SpawnContext(Vector3 position, GridArea.Cell cell, EnemyDeathFxPool deathFxPool, EnemyStats enemyStats = null)
             {
                 this.position = position;
                 this.cell = cell;
                 this.deathFxPool = deathFxPool;
+                this.enemyStats = enemyStats;
             }
         }
 

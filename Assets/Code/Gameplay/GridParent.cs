@@ -57,14 +57,21 @@ namespace Game.Gameplay
             if (offsetedXPosition >= maxXPosOffset)
             {
                 rowMovementDirection = -1;
+                BoundsHit();
             }
 
             if (offsetedXPosition <= -maxXPosOffset)
             {
                 rowMovementDirection = 1;
+                BoundsHit();
             }
 
             transform.position += Vector3.right * rowMovementDirection * Time.deltaTime * 2; //AHA! floating forgotten conts! should be in stats as speed
+        }
+
+        private void BoundsHit()
+        {
+            transform.position += Vector3.down * 1f;
         }
     }
 }

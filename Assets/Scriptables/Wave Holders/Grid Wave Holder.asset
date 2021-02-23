@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridParent: {fileID: 7631733681679809250, guid: 29b6649cd81cb9a4abad5a93e9a27465,
     type: 3}
-  autoPositionRows: 1
+  autoPositionRows: 0
   miniBossCount: 0

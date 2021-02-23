@@ -16,6 +16,11 @@ namespace Game.Gameplay
         //debug hax
         private bool godMode = false;
 
+        private void Start()
+        {
+            Initialize();
+        }
+
         protected override void Initialize()
         {
             Stats = unitDefinitionsProvider.Player.Stats;
@@ -63,15 +68,10 @@ namespace Game.Gameplay
         protected override void Update()
         {
             base.Update();
-
-            //there was supposed to be a feature with gun heat and cooldown,
-            //to sometimes be able to shoot a series of projectiles, but...well, have fun
             if (inputCtrl.Fire)
             {
-                Shoot();
+                ShootIfCan();
             }
-
-            ShootIfCan();
         }
 
         protected override void Shoot()

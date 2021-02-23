@@ -44,7 +44,7 @@ namespace Game.Gameplay
         {
             container.Inject(this);
             //just to be sure
-            Initialize();
+            //Initialize();
         }
 
         protected virtual void Initialize()
@@ -54,12 +54,6 @@ namespace Game.Gameplay
             spriteRenderer.color = Stats.Color;
             shootMaxTime = Stats.ShootTime;
             shootTimer = 0;
-        }
-
-        public virtual void Initialize(EnemyStats enemyStats)
-        {
-            Stats = enemyStats;
-            Initialize();
         }
 
         protected virtual void ClearEvents()
