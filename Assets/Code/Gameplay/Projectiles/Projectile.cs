@@ -7,25 +7,24 @@ namespace Game.Gameplay
     public class Projectile : MonoBehaviour, IPoolable<Projectile.SpawnContext, ProjectilesPool>
     {
         [SerializeField] private ProjectileStats stats = null;
-        [SerializeField] BoxCollider2D boxCollider2d = null;
-        [SerializeField] MeshRenderer meshRenderer = null;
+        [SerializeField] private BoxCollider2D boxCollider2d = null;
+        [SerializeField] private MeshRenderer meshRenderer = null;
 
         //playable area should keep track of out of bounds objects?
-        [Inject] PlayableArea playableArea = null;
-        [Inject] GameplayController gameplayCtrl = null;
-        [Inject] ProjectileHitFxPool hitFxPool = null;
+        [Inject] private PlayableArea playableArea = null;
+        [Inject] private GameplayController gameplayCtrl = null;
+        [Inject] private ProjectileHitFxPool hitFxPool = null;
         //this...should not be here
-        [Inject] PointsManager pointsManager = null;
+        [Inject] private PointsManager pointsManager = null;
 
         //projectiles also can be friendly!
         private EFaction faction;
         private ProjectilesPool attachedPool;
         private SpawnContext context;
-
-        ContactFilter2D contactFilter;
+        private ContactFilter2D contactFilter;
 
         //stash collision results for reusing
-        Collider2D[] contactResults = new Collider2D[1];
+        private Collider2D[] contactResults = new Collider2D[1];
 
         //yeah, base class for all projectiles
         protected EFaction Faction => faction;
@@ -52,11 +51,11 @@ namespace Game.Gameplay
             switch (spawnContext.Instigator.Faction)
             {
                 case EFaction.Player:
-                    contactFilter.layerMask = Layers.Bit.Enemy | Layers.Bit.EnemyProjectile;
+                    contactFilter.layerMask = Layers.Bit.Enemy | Layers.Bit.EnemyProjectile | Layers.Bit.Obstacle;
                     this.gameObject.layer = Layers.Int.PlayerProjectile;
                     break;
                 case EFaction.Enemy:
-                    contactFilter.layerMask = Layers.Bit.Player | Layers.Bit.PlayerProjectile;
+                    contactFilter.layerMask = Layers.Bit.Player | Layers.Bit.PlayerProjectile | Layers.Bit.Obstacle;
                     this.gameObject.layer = Layers.Int.EnemyProjectile;
                     break;
                 default:
@@ -71,7 +70,7 @@ namespace Game.Gameplay
 
         //TODO: move spawning of projectiles to helper class
         //or create a "spawnable pickable"
-        void SpawnFourProjectiles()
+        private void SpawnFourProjectiles()
         {
             Vector3 dir = Vector3.up;
             Quaternion rotation = Quaternion.Euler(0, 0, 45);
@@ -91,14 +90,16 @@ namespace Game.Gameplay
             }
         }
 
-        void Update()
+        private void Update()
         {
             //TODO: create custom update to be updated during gameplay
             if (gameplayCtrl.CurrentGameplayState == EGameplayState.Playing)
+            {
                 transform.position += context.Direction * context.Speed * Time.deltaTime;
+            }
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             //can't even...
             if (!playableArea.GameBounds.Contains(transform.position))
@@ -111,12 +112,23 @@ namespace Game.Gameplay
 
             if (hits > 0)
             {
-                bool isUnit = contactResults[0].TryGetComponent<IUnit>(out var unit);
+                Component unitComponent = contactResults[0].attachedRigidbody;
+                if (unitComponent == null)
+                {
+                    unitComponent = contactResults[0];
+                }
+
+                bool isUnit = unitComponent.TryGetComponent<IUnit>(out var unit);
                 if (isUnit)
                 {
                     //no friendly fire
                     if (unit.Faction != faction)
                     {
+                        //player cannot damage shields
+                        if (unit.Faction == EFaction.Obstacle && faction == EFaction.Player)
+                        {
+                            return;
+                        }
                         unit.ReceiveDamage(stats.Damage);
                         Destroy();
                     }
@@ -124,7 +136,9 @@ namespace Game.Gameplay
                 else
                 {
                     if (faction == EFaction.Enemy)
+                    {
                         return;
+                    }
 
                     //checking collision of projectiles from different layes/instigators/factions
                     bool isProjectile = contactResults[0].TryGetComponent<Projectile>(out var projectile);
@@ -141,7 +155,7 @@ namespace Game.Gameplay
             }
         }
 
-        void Destroy()
+        private void Destroy()
         {
             hitFxPool.Spawn(new ProjectileHitFx.SpawnContext()
             {

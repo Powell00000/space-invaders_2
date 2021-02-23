@@ -1,8 +1,9 @@
 ﻿namespace Game.Gameplay
 {
-   public enum EFaction
-   {
-      Player,
-      Enemy,
-   }
+    public enum EFaction
+    {
+        Player,
+        Enemy,
+        Obstacle
+    }
 }

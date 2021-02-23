@@ -1,25 +1,25 @@
 ﻿using System.Collections.Generic;
 using Zenject;
 
-namespace Game.Gameplay
+namespace Assets.Code.Gameplay.Units.Shield
 {
-    public class EnemyPool : MonoMemoryPool<Enemy.SpawnContext, Enemy>
+    public class ShieldBricksPool : MonoMemoryPool<ShieldBrick.SpawnContext, ShieldBrick>
     {
-        private List<Enemy> spawnedItems = new List<Enemy>();
+        private List<ShieldBrick> spawnedItems = new List<ShieldBrick>();
 
-        protected override void Reinitialize(Enemy.SpawnContext p1, Enemy item)
+        protected override void Reinitialize(ShieldBrick.SpawnContext p1, ShieldBrick item)
         {
             item.OnSpawned(p1, this);
             base.Reinitialize(p1, item);
         }
 
-        protected override void OnSpawned(Enemy item)
+        protected override void OnSpawned(ShieldBrick item)
         {
             base.OnSpawned(item);
             spawnedItems.Add(item);
         }
 
-        protected override void OnDespawned(Enemy item)
+        protected override void OnDespawned(ShieldBrick item)
         {
             base.OnDespawned(item);
             item.OnDespawned();
