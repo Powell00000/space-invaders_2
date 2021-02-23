@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Code.Gameplay.Waves;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +10,7 @@ namespace Game.Gameplay
     public class GameplayController : MonoBehaviour, IInitializable, IDisposable
     {
         [Inject] private PlayerController playerCtrl = null;
-        [Inject] private WaveManager waveManager = null;
+        [Inject] private WaveManagerBase waveManager = null;
         [Inject] private InputController inputCtrl = null;
         [Inject] private PlayableArea gameBounds = null;
 

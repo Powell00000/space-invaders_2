@@ -1,35 +1,31 @@
-﻿using UnityEngine;
+﻿using Assets.Code.Gameplay.Waves;
+using UnityEngine;
 
 namespace Game.Gameplay
 {
-    public class WaveManager : MonoBehaviour, Zenject.IInitializable, System.IDisposable
+    public class WaveManager : WaveManagerBase
     {
         //here is our progression of waves
-        [SerializeField] WaveHolder[] waveStatsHolders = null;
+        [SerializeField] private WaveHolder[] waveStatsHolders = null;
 
-        [Zenject.Inject] GameplayController gameplayCtrl = null;
-        [Zenject.Inject] WaveProgressController waveProgress = null;
-        [Zenject.Inject] PlayableArea playableArea = null;
-        [Zenject.Inject] InputController inputCtrl = null;
-
-        public System.Action<Wave> OnWaveTriggered;
-        public System.Action OnAllWavesFinished;
+        [Zenject.Inject] private GameplayController gameplayCtrl = null;
+        [Zenject.Inject] private WaveProgressController waveProgress = null;
+        [Zenject.Inject] private PlayableArea playableArea = null;
+        [Zenject.Inject] private InputController inputCtrl = null;
 
         //for auto positioning
-        const float gridsYOffset = 2;
+        private const float gridsYOffset = 2;
+        private Wave currentWave;
+        private GridParent spawnedGridParent;
+        private int waveIndex = -1;
 
-        Wave currentWave;
-        GridParent spawnedGridParent;
-
-        int waveIndex = -1;
-
-        public void Initialize()
+        public override void Initialize()
         {
             gameplayCtrl.OnLevelStarting += OnLevelStarting;
             waveProgress.OnWaveFinished += SpawnNextWave;
         }
 
-        void SpawnNextWave()
+        private void SpawnNextWave()
         {
             ClearSpawnedAreas();
 
@@ -57,7 +53,9 @@ namespace Game.Gameplay
                 GridArea area = spawnedGridParent.Grids[i];
 
                 if (waveStats.AutoPositionRows)
+                {
                     area.transform.position = playableArea.TopGridSpawnPosition - Vector3.up * i * gridsYOffset;
+                }
 
                 area.Initialize();
             }
@@ -67,7 +65,7 @@ namespace Game.Gameplay
             OnWaveTriggered?.Invoke(currentWave);
         }
 
-        void ClearSpawnedAreas()
+        private void ClearSpawnedAreas()
         {
             //enemies does not despawn with grids
             if (spawnedGridParent != null)
@@ -77,35 +75,27 @@ namespace Game.Gameplay
             }
         }
 
-        void OnLevelStarting()
+        private void OnLevelStarting()
         {
             waveIndex = -1;
             SpawnNextWave();
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             if (gameplayCtrl)
-                gameplayCtrl.OnLevelStarting -= OnLevelStarting;
-            if (waveProgress != null)
-                waveProgress.OnWaveFinished -= SpawnNextWave;
-            if (inputCtrl != null)
-                inputCtrl.KillAllEnemies -= ClearSpawnedAreas;
-        }
-
-        [System.Serializable]
-        public class Wave
-        {
-            GridParent gridParent;
-            WaveHolder waveSettings;
-
-            public GridParent SpawnedGridParent => gridParent;
-            public WaveHolder WaveSettings => waveSettings;
-
-            public Wave(GridParent spawnedGridParent, WaveHolder waveSettings)
             {
-                this.gridParent = spawnedGridParent;
-                this.waveSettings = waveSettings;
+                gameplayCtrl.OnLevelStarting -= OnLevelStarting;
+            }
+
+            if (waveProgress != null)
+            {
+                waveProgress.OnWaveFinished -= SpawnNextWave;
+            }
+
+            if (inputCtrl != null)
+            {
+                inputCtrl.KillAllEnemies -= ClearSpawnedAreas;
             }
         }
     }

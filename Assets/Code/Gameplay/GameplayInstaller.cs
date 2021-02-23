@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Assets.Code.Gameplay.Units.Enemies;
+using Assets.Code.Gameplay.Waves;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Gameplay
@@ -9,7 +11,7 @@ namespace Game.Gameplay
         [SerializeField] private InputController inputController = null;
         [SerializeField] private UnitDefinitionsProvider unitDefinitionsProvider = null;
         [SerializeField] private PlayableArea playableArea = null;
-        [SerializeField] private WaveManager waveManager = null;
+        [SerializeField] private WaveManagerBase waveManager = null;
 
 
         public override void InstallBindings()
@@ -20,14 +22,17 @@ namespace Game.Gameplay
             Container.Bind<PlayableArea>().FromInstance(playableArea);
             Container.Bind<UnitDefinitionsProvider>().FromInstance(unitDefinitionsProvider);
 
+            var enemySpawner = new EnemyGridSpawner();
+            Container.BindInterfacesAndSelfTo<EnemySpawnerBase>().FromInstance(enemySpawner);
+            Container.QueueForInject(enemySpawner);
+
             Container.BindInterfacesAndSelfTo<GlobalShootingAI>().AsSingle();
             Container.BindInterfacesAndSelfTo<PointsManager>().AsSingle();
-
             Container.BindInterfacesAndSelfTo<PoolsController>().AsSingle();
             Container.BindInterfacesAndSelfTo<WaveProgressController>().AsSingle();
-            Container.BindInterfacesAndSelfTo<EnemySpawner>().AsSingle();
-            Container.BindInterfacesAndSelfTo<WaveManager>().FromInstance(waveManager);
+            Container.BindInterfacesAndSelfTo<WaveManagerBase>().FromInstance(waveManager);
             Container.BindInterfacesAndSelfTo<GameplayController>().FromInstance(gameplayController);
+
         }
     }
 }
