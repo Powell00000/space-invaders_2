@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy 4 Stats
   m_EditorClassIdentifier: 
   hitsTillDeath: 1
-  pointsForDestroying: 10
+  pointsForDestroying: 40
   color: {r: 1, g: 0, b: 0.8499999, a: 1}
   baseProjectileSpeed: 8
   shootTime: 1

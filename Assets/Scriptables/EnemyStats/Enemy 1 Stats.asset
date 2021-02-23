@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad042a965dadfaf4e993aac8b7925c94, type: 3}
   m_Name: Enemy 1 Stats
   m_EditorClassIdentifier: 
-  health: 1
+  hitsTillDeath: 1
   pointsForDestroying: 10
   color: {r: 1, g: 0, b: 0, a: 1}
   baseProjectileSpeed: 8
@@ -20,5 +20,5 @@ MonoBehaviour:
   flySpeed: 10
   movementSpeed: 2
   animationFrames:
-  - {fileID: 7800703560180344041, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
-  - {fileID: 8535904028482237896, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -7588944164959730508, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -1334514939914696026, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
