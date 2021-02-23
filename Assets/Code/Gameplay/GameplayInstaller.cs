@@ -1,4 +1,5 @@
-﻿using Assets.Code.Gameplay.Units.Enemies;
+﻿using Assets.Code.Gameplay;
+using Assets.Code.Gameplay.Units.Enemies;
 using Assets.Code.Gameplay.Waves;
 using UnityEngine;
 using Zenject;
@@ -12,6 +13,7 @@ namespace Game.Gameplay
         [SerializeField] private UnitDefinitionsProvider unitDefinitionsProvider = null;
         [SerializeField] private PlayableArea playableArea = null;
         [SerializeField] private WaveManagerBase waveManager = null;
+        [SerializeField] private GameplaySettings gameplaySettings;
 
 
         public override void InstallBindings()
@@ -21,6 +23,7 @@ namespace Game.Gameplay
             Container.Bind<InputController>().FromInstance(inputController);
             Container.Bind<PlayableArea>().FromInstance(playableArea);
             Container.Bind<UnitDefinitionsProvider>().FromInstance(unitDefinitionsProvider);
+            Container.Bind<GameplaySettings>().FromInstance(gameplaySettings);
 
             var enemySpawner = new EnemyGridSpawner();
             Container.BindInterfacesAndSelfTo<EnemySpawnerBase>().FromInstance(enemySpawner);

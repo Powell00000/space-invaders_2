@@ -315,7 +315,7 @@ Camera:
   far clip plane: 50
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 32.1
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -338,7 +338,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: 1e-45, y: -1e-45, z: -1.6209067e-15, w: 1}
+  m_LocalRotation: {x: -3e-45, y: -1e-45, z: -1.6209067e-15, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1104,6 +1104,7 @@ MonoBehaviour:
   unitDefinitionsProvider: {fileID: 825324597}
   playableArea: {fileID: 1020787071}
   waveManager: {fileID: 1162743613}
+  gameplaySettings: {fileID: 11400000, guid: d220ff09c22b69c4aaa0575cc313264b, type: 2}
 --- !u!114 &1054059214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1377,7 +1378,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1688070407}
-  m_LocalRotation: {x: 1e-45, y: -1e-45, z: -1.6209067e-15, w: 1}
+  m_LocalRotation: {x: -3e-45, y: -1e-45, z: -1.6209067e-15, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

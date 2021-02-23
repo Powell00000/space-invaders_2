@@ -71,7 +71,7 @@ namespace Game.Gameplay
 
         private void BoundsHit()
         {
-            transform.position += Vector3.down * 1f;
+            transform.position += Vector3.down * gameplayController.GameplaySettings.DownwardOffset;
         }
     }
 }
