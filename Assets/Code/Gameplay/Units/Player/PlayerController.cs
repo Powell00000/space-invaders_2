@@ -9,17 +9,20 @@ namespace Game.Gameplay
         [Inject] private UnitDefinitionsProvider unitDefProvider = null;
         [Inject] private PlayableArea playableArea = null;
 
+        private int playerHealth = 0;
+        private Player spawnedPlayer;
+
         public System.Action OnPlayerDied;
+        public System.Action OnPlayerHit;
 
         public Vector3 PlayerPosition => spawnedPlayer.transform.position;
-
-        private Player spawnedPlayer;
+        public int LivesLeft => playerHealth;
 
         public void MaintainPlayerSpawn()
         {
             DespawnPlayer();
             spawnedPlayer = Object.Instantiate(unitDefProvider.Player.Prefab) as Player;
-
+            playerHealth = unitDefProvider.Player.Stats.HitsTillDeath;
             spawnedPlayer.transform.position = playableArea.PlayerSpawnPosition;
 
             ConnectEvents();
@@ -39,7 +42,8 @@ namespace Game.Gameplay
 
         private void PlayerReceivedDamage()
         {
-
+            playerHealth = spawnedPlayer.CurrentHealth;
+            OnPlayerHit?.Invoke();
         }
 
         private void PlayerDied(Unit deadUnit)

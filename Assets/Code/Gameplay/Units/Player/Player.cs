@@ -44,7 +44,7 @@ namespace Game.Gameplay
             }
         }
 
-        protected override void CalculateHealthLeft(float damageAmount)
+        protected override void CalculateHealthLeft(int damageAmount)
         {
             if (!godMode)
             {
