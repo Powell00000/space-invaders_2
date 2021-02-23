@@ -18,6 +18,12 @@ namespace Game.Gameplay
 
         public System.Action<Enemy> OnPooled;
 
+        protected override void Initialize()
+        {
+            animationTimeElapsed = 0;
+            base.Initialize();
+        }
+
         public void OnDespawned()
         {
             if (OnPooled != null)
