@@ -30,7 +30,7 @@ namespace Game.Gameplay
 
         private float shootTimer;
         private float shootMaxTime;
-        protected bool CanShoot => shootTimer >= shootMaxTime;
+        public virtual bool CanShoot => shootTimer >= shootMaxTime;
 
         protected virtual void Death()
         {
@@ -51,7 +51,7 @@ namespace Game.Gameplay
 
             spriteRenderer.color = Stats.Color;
             shootMaxTime = Stats.ShootTime;
-            shootTimer = 0;
+            shootTimer = shootMaxTime;
         }
 
         protected virtual void ClearEvents()

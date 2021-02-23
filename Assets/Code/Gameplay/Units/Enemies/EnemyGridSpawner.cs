@@ -1,5 +1,6 @@
 ﻿using Assets.Code.Gameplay.Waves;
 using Game.Gameplay;
+using UnityEngine;
 
 namespace Assets.Code.Gameplay.Units.Enemies
 {
@@ -7,12 +8,17 @@ namespace Assets.Code.Gameplay.Units.Enemies
     {
         [Zenject.Inject] private WaveManagerBase waveManager = null;
         [Zenject.Inject] private EnemyPool enemyPool = null;
-        //[Zenject.Inject] private MiniBossPool miniBossPool = null;
+        [Zenject.Inject] private MiniBossPool miniBossPool = null;
+        [Zenject.Inject] private PlayableArea playableArea = null;
         [Zenject.Inject] private EnemyDeathFxPool enemyDeathFxPool = null;
+
+        private Vector3 targetPosOnArc;
+        private Vector3 spawnOffset;
 
         public override void Initialize()
         {
             waveManager.OnWaveTriggered += SpawnEnemies;
+            spawnOffset = Vector3.up * playableArea.Width / 1.5f;
         }
 
         private void SpawnEnemies(WaveManagerBase.Wave currentWave)
@@ -36,6 +42,23 @@ namespace Assets.Code.Gameplay.Units.Enemies
                         OnEnemySpawned(spawnedEnemy);
                     }
                 }
+            }
+
+            for (int i = 0; i < currentWave.WaveSettings.MiniBossCount; i++)
+            {
+                //SpawnMiniBoss();
+            }
+        }
+
+        private void SpawnMiniBoss()
+        {
+            //random position on half sphere outside screen view
+            targetPosOnArc = Quaternion.AngleAxis(Random.Range(-90f, 90f), Vector3.forward) * spawnOffset;
+
+            var miniBoss = miniBossPool.Spawn(new MiniBoss.SpawnContext(targetPosOnArc, enemyDeathFxPool));
+            if (OnEnemySpawned != null)
+            {
+                OnEnemySpawned(miniBoss);
             }
         }
 

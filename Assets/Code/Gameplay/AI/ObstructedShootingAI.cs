@@ -35,7 +35,7 @@ namespace Game.Gameplay
                 if (timer >= shootTime)
                 {
                     var randomEnemyIndex = Random.Range(0, waveProgressCtrl.AliveEnemies.Count);
-                    waveProgressCtrl.AliveEnemies[randomEnemyIndex].ShootIfCan();
+                    waveProgressCtrl.EnemiesAbleToShoot[randomEnemyIndex].ShootIfCan();
                     timer = Random.Range(0, shootTime);
                 }
             }

@@ -14,15 +14,31 @@ namespace Game.Gameplay
 
         public Action OnWaveFinished;
         private List<Unit> aliveEnemies;
+        private List<Unit> enemiesAbleToShoot;
 
         //TODO: should it be public?
         public List<Unit> AliveEnemies => aliveEnemies;
+        public List<Unit> EnemiesAbleToShoot => GetEnemiesAbleToShoot();
 
         private int aliveEnemiesCount => aliveEnemies.Count;
 
+        private List<Unit> GetEnemiesAbleToShoot()
+        {
+            enemiesAbleToShoot.Clear();
+            for (int i = 0; i < aliveEnemies.Count; i++)
+            {
+                if (aliveEnemies[i].CanShoot)
+                {
+                    enemiesAbleToShoot.Add(aliveEnemies[i]);
+                }
+            }
+            return enemiesAbleToShoot;
+        }
+
         void IInitializable.Initialize()
         {
-            aliveEnemies = new List<Unit>();
+            aliveEnemies = new List<Unit>(50);
+            enemiesAbleToShoot = new List<Unit>(50);
             enemySpawner.OnEnemySpawned += OnEnemySpawned;
             //for progressing faster
             inputCtrl.KillAllEnemies += DespawnAliveEnemies;
