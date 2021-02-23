@@ -7,7 +7,7 @@ namespace Assets.Code.Gameplay.Units.Enemies
     {
         public Action<Unit> OnEnemySpawned;
 
-        public abstract void Dispose();
         public abstract void Initialize();
+        public abstract void Dispose();
     }
 }

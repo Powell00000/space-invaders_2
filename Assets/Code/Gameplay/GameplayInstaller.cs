@@ -22,7 +22,7 @@ namespace Game.Gameplay
             Container.Bind<PlayableArea>().FromInstance(playableArea);
             Container.Bind<UnitDefinitionsProvider>().FromInstance(unitDefinitionsProvider);
 
-            var enemySpawner = new EnemySpawner();
+            var enemySpawner = new EnemyGridSpawner();
             Container.BindInterfacesAndSelfTo<EnemySpawnerBase>().FromInstance(enemySpawner);
             Container.QueueForInject(enemySpawner);
 
