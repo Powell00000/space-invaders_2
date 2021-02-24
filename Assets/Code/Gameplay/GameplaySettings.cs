@@ -11,10 +11,15 @@ namespace Assets.Code.Gameplay
         [SerializeField]
         private float secondsToSpawnSpecialShip = 4f;
 
-        [SerializeField]
+        [SerializeField, Tooltip("Used for additional points. Time elapsed is not clamped (can receive 120%)")]
         private int maxGameTimeInSeconds = 60;
+
+        [SerializeField]
+        private int basePointsAmountForFinishing = 1000;
 
         public float DownwardOffset => downwardOffset;
         public float SecondsToSpawnSpecialShip => secondsToSpawnSpecialShip;
+        public int MaxGameTimeInSeconds => maxGameTimeInSeconds;
+        public int BasePointsAmountForFinishing => basePointsAmountForFinishing;
     }
 }

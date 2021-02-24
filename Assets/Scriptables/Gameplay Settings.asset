@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Gameplay Settings
   m_EditorClassIdentifier: 
   downwardOffset: 0.2
-  secondsToSpawnSpecialShip: 4
+  secondsToSpawnSpecialShip: 8
   maxGameTimeInSeconds: 60
+  basePointsAmountForFinishing: 1000
