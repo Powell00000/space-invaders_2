@@ -27,7 +27,7 @@ namespace Game.Gameplay
 
         private void OnUnitDeath(Unit deadUnit)
         {
-            AddPoints(deadUnit.Stats.PointsForDestroying);
+            AddPoints(deadUnit.GetPointsForDestruction());
         }
 
         private void ClearPoints()

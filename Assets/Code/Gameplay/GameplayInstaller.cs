@@ -26,7 +26,8 @@ namespace Game.Gameplay
             Container.Bind<GameplaySettings>().FromInstance(gameplaySettings);
 
             var enemySpawner = new EnemyGridSpawner();
-            Container.BindInterfacesAndSelfTo<EnemySpawnerBase>().FromInstance(enemySpawner);
+            Container.Bind<EnemySpawnerBase>().FromInstance(enemySpawner);
+            Container.BindInterfacesTo<EnemyGridSpawner>().FromInstance(enemySpawner);
             Container.QueueForInject(enemySpawner);
 
             Container.BindInterfacesAndSelfTo<GlobalShootingAI>().AsSingle();

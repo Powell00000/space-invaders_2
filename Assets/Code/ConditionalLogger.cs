@@ -1,4 +1,4 @@
-﻿//#define UNITY_LOG
+﻿#define UNITY_LOG
 
 using UnityEngine;
 

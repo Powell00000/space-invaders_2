@@ -20,6 +20,11 @@ namespace Game.Gameplay
         public float Width => Mathf.Abs(left.position.x) + Mathf.Abs(right.position.x);
         public float PlayableHeight => Vector3.Distance(PlayerSpawnPosition + Vector3.up * 5, TopGridSpawnPosition - Vector3.up * 2);
 
+        public float Left => left.position.x;
+        public float Right => right.position.x;
+        public float Top => top.position.y;
+        public float Bottom => bottom.position.y;
+
         public void CalculateBounds()
         {
             gameBounds = new Bounds(transform.position, Vector3.zero);
