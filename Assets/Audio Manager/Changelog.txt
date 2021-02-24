@@ -1,0 +1,71 @@
+Audio Manager Change Log:
+
+2.4.1
+
+Patch to fix issues reported to us by a user on our community discord server.
+
+Given this issues in patch 1 and that both patches are needed for the asset to work correctly, it warrants a bug fix release version. 
+
+* Asset Changes *
+= Added a "should loop track" option to the music player inspector so users can toggle this option.
+~ Fixed an issue where having only 1 clip in a directory would break the inspector.
+~ Fixed an issue where having a blank directory not be first in the order would break the scanning functionality.
+
+
+2.4.0 (Patch 1)
+
+* Asset Changes *
+~ Fixed an issue where multiple directiroes would not work.
+~ Fixed an issue where the default Music Player script would appear under the custom inspector. 
+
+
+2.4.0
+
+* Store Listing Changes *
+- Updated Store Listing to have report issues link.
+
+* Asset Changes *
++ Added support for Audio Mixers in the Audio Manager.
++ Added UI Audio Player Script + Custom Inspector.
++ Added Music Player Script + Custom Inspector.
++ Changed the way the asset saves audio.
++ Improved the play call methods to not constantly use "GetComponent".
++ Updated comments and header comments with new format.
+
+* Bug Fixes *
+~ Fixed issues with the Audio Manager Inspector not renderering on reload.
+~ Fixed issues where the inspeoctor would fail to scan a valid path.
+~ Fixed issues where the Audio Manager would lose data.
+
+
+2.3.4
+
+* Store Listing Changes *
+- Updated the asset title to remove the "(CG)" characters after the asset name. This has been replaced with "| CG" instead to look a little neater.
+- Updated the main asset description to explain more about the asset and its features. 
+- Updated all links to be correct for the asset.
+- Updated to key images to all be the same size as the main key image.
+
+* Asset Changes *
++ Updated script header comments to the latest format.
++ Added box background to each section on the inspector for a cleaner look.
++ Removed unused code from previous iterations of the asset. 
++ Moved some code into methods for a cleaner editor script.
++ Updated comments across all scripts
+
+* Bug Fixes *
+~ Fixed a bug where the directories section could not be toggled by the user.
+~ Fixed a bug where the asset would cause the scene to always need saving every frame.
+
+
+2.3.3
+
+HotFix! 1&2 - Updated the discord invite, as it was broken, to be our redirect so it doesn't need updating again. Fixed the store page discord logo to be a proper logo to comply with the store requirements.
+
+Fixed several minor issues with the inspector editor that would cause problems for users. 
+~ Attempt to fix a bug where the inspector would reset after a build was made
+~ Attempt to fix problems with the inspector not showing directories correctly
+~ Removed old buttons that are not needed anymore due to the inspector updating itself on the go.
+
+
+2.3.2 & older | logs not saved :(

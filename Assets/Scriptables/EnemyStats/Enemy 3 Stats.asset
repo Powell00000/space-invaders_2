@@ -17,6 +17,7 @@ MonoBehaviour:
   color: {r: 0, g: 0.3833332, b: 1, a: 1}
   baseProjectileSpeed: 8
   shootTime: 1
+  deathSound: invaderkilled
   flySpeed: 10
   movementSpeed: 2
   animationFrames:

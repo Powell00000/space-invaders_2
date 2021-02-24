@@ -91,6 +91,7 @@ namespace Game.Gameplay
                     Vector3.up,
                     playerStats.Color
                 ));
+            audioManager.Play(playerStats.ShootSound);
         }
 
         protected override void MovementFunction()

@@ -10,6 +10,8 @@ public abstract class UnitStats : ScriptableObject
     [SerializeField] private float baseProjectileSpeed = 10;
     [SerializeField] private float shootTime = 1;
 
+    [SerializeField] private string deathSound;
+
     public int HitsTillDeath => hitsTillDeath;
     public int PointsForDestroying => pointsForDestroying;
     public Color Color => color;
@@ -17,4 +19,5 @@ public abstract class UnitStats : ScriptableObject
     public float BaseProjectileSpeed => baseProjectileSpeed;
     public float ShootTime => shootTime;
 
+    public string DeathSound => deathSound;
 }
