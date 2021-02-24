@@ -1,23 +1,34 @@
 ﻿using Assets.Code.Gameplay.Units.Enemies;
 using System;
+using UnityEngine;
+using Zenject;
 
 namespace Game.Gameplay
 {
     //keeping track of points
-    public class PointsManager : Zenject.IInitializable, IDisposable
+    public class PointsManager : Zenject.IInitializable, IDisposable, ITickable
     {
-        [Zenject.Inject] private EnemySpawnerBase enemySpawner = null;
-        [Zenject.Inject] private GameplayController gameplayCtrl = null;
+        [Inject] private EnemySpawnerBase enemySpawner = null;
+        [Inject] private GameplayController gameplayCtrl = null;
         private int currentPoints;
         public Action<int> OnPointsChanged;
 
         public int CurrentPoints => currentPoints;
 
+        private float gameplayTime;
+
         public void Initialize()
         {
             enemySpawner.OnEnemySpawned += EnemySpawned;
             gameplayCtrl.OnLevelStarting += ClearPoints;
+            gameplayCtrl.OnStateChanged += GameplayStateChanged;
             ClearPoints();
+        }
+
+        private void GameplayStateChanged(EGameplayState currentState)
+        {
+            var additionalPoints = gameplayCtrl.GameplaySettings.BasePointsAmountForFinishing * (gameplayTime / gameplayCtrl.GameplaySettings.MaxGameTimeInSeconds);
+            AddPoints(Mathf.CeilToInt(additionalPoints));
         }
 
         private void EnemySpawned(Unit unit)
@@ -43,6 +54,7 @@ namespace Game.Gameplay
 
         public void AddPoints(int amount)
         {
+            ConditionalLogger.Log($"added {amount} points");
             SetPoints(currentPoints + amount);
         }
 
@@ -65,6 +77,16 @@ namespace Game.Gameplay
             {
                 gameplayCtrl.OnLevelStarting -= ClearPoints;
             }
+        }
+
+        public void Tick()
+        {
+            if (gameplayCtrl.CurrentGameplayState != EGameplayState.Playing)
+            {
+                return;
+            }
+
+            gameplayTime += Time.deltaTime;
         }
     }
 }
