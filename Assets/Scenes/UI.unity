@@ -576,6 +576,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOver
       objectReference: {fileID: 0}
+    - target: {fileID: 4870134895225465339, guid: ae1a4bb7cfa51054b98ed956da5276a9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8194083717734848498, guid: ae1a4bb7cfa51054b98ed956da5276a9,
         type: 3}
       propertyPath: m_Camera
@@ -606,6 +611,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Gameplay
+      objectReference: {fileID: 0}
+    - target: {fileID: 1362781584302866358, guid: 62008f95c4a038546ab8b8de9d6b84da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2362306200299684287, guid: 62008f95c4a038546ab8b8de9d6b84da,
         type: 3}

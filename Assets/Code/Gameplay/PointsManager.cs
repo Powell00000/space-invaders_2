@@ -1,4 +1,5 @@
-﻿using Assets.Code.Gameplay.Units.Enemies;
+﻿using Assets.Code;
+using Assets.Code.Gameplay.Units.Enemies;
 using System;
 using UnityEngine;
 using Zenject;
@@ -6,16 +7,19 @@ using Zenject;
 namespace Game.Gameplay
 {
     //keeping track of points
-    public class PointsManager : Zenject.IInitializable, IDisposable, ITickable
+    public class PointsManager : IInitializable, IDisposable, ITickable
     {
         [Inject] private EnemySpawnerBase enemySpawner = null;
         [Inject] private GameplayController gameplayCtrl = null;
+        [Inject] private LeaderboardController leaderboardCtrl = null;
+
         private int currentPoints;
-        public Action<int> OnPointsChanged;
-
-        public int CurrentPoints => currentPoints;
-
         private float gameplayTime;
+        private bool newHighScore;
+
+        public Action<int> OnPointsChanged;
+        public int CurrentPoints => currentPoints;
+        public bool NewHighScore => newHighScore;
 
         public void Initialize()
         {
@@ -29,6 +33,15 @@ namespace Game.Gameplay
         {
             var additionalPoints = gameplayCtrl.GameplaySettings.BasePointsAmountForFinishing * (gameplayTime / gameplayCtrl.GameplaySettings.MaxGameTimeInSeconds);
             AddPoints(Mathf.CeilToInt(additionalPoints));
+
+            if (currentPoints > leaderboardCtrl.GetBiggestPoints())
+            {
+                newHighScore = true;
+            }
+            else
+            {
+                newHighScore = false;
+            }
         }
 
         private void EnemySpawned(Unit unit)
