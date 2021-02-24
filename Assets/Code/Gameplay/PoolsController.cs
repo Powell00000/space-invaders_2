@@ -5,7 +5,6 @@
     {
         [Zenject.Inject] private ProjectilesPool projectilesPool = null;
         [Zenject.Inject] private EnemyPool enemyPool = null;
-        [Zenject.Inject] private MiniBossPool miniBossPool = null;
         [Zenject.Inject] private SpecialEnemyPool specialEnemyPool = null;
         [Zenject.Inject] private GameplayController gameplayCtrl = null;
 
@@ -24,7 +23,6 @@
         {
             projectilesPool.DespawnAll();
             enemyPool.DespawnAll();
-            miniBossPool.DespawnAll();
             specialEnemyPool.DespawnAll();
         }
     }

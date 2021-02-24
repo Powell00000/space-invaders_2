@@ -10,7 +10,6 @@ namespace Game.Gameplay
         [SerializeField] private ProjectileHitFx projectileHitPrefab = null;
         [SerializeField] private Enemy enemyPrefab = null;
         [SerializeField] private SpecialEnemy specialEnemyPrefab = null;
-        [SerializeField] private MiniBoss miniBossPrefab = null;
         [SerializeField] private EnemyDeathFx enemyDeathFxPrefab = null;
         [SerializeField] private ShieldBrick shieldBrickPrefab = null;
 
@@ -19,7 +18,6 @@ namespace Game.Gameplay
         private static readonly int enemyPoolSize = 40;
         private static readonly int specialEnemyPoolSize = 2;
         private static readonly int enemyDeathFxPoolSize = enemyPoolSize;
-        private static readonly int minibossPoolSize = 4;
         private static readonly int shieldBrickPoolSize = 50;
 
         public override void InstallBindings()
@@ -43,11 +41,6 @@ namespace Game.Gameplay
                 .WithInitialSize(specialEnemyPoolSize)
                 .FromComponentInNewPrefab(specialEnemyPrefab)
                 .UnderTransformGroup("Special Enemies");
-
-            Container.BindMemoryPool<MiniBoss, MiniBossPool>()
-                .WithInitialSize(minibossPoolSize)
-                .FromComponentInNewPrefab(miniBossPrefab)
-                .UnderTransformGroup("MiniBoss");
 
             Container.BindMemoryPool<EnemyDeathFx, EnemyDeathFxPool>()
                 .WithInitialSize(enemyDeathFxPoolSize)
