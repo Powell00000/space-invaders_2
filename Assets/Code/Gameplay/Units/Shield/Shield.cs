@@ -16,6 +16,7 @@ public class Shield : MonoBehaviour
 
     private void Awake()
     {
+        RebuildShield();
         gameplayController.OnLevelStarting += RebuildShield;
     }
 
