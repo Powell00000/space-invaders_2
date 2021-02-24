@@ -36,11 +36,11 @@ namespace Game.Gameplay
 
             if (godMode)
             {
-                spriteRenderer.SetEmission(Color.green); //just for visibility
+                spriteRenderer.color = Color.green; //just for visibility
             }
             else
             {
-                spriteRenderer.SetEmission(playerStats.Color);
+                spriteRenderer.color = playerStats.Color;
             }
         }
 
@@ -70,7 +70,14 @@ namespace Game.Gameplay
             base.Update();
             if (inputCtrl.Fire)
             {
-                ShootIfCan();
+                if (godMode)
+                {
+                    Shoot();
+                }
+                else
+                {
+                    ShootIfCan();
+                }
             }
         }
 

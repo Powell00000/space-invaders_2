@@ -1,24 +1,24 @@
 ﻿using Assets.Code.Gameplay.Waves;
 using Game.Gameplay;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Code.Gameplay.Units.Enemies
 {
-    internal class EnemyGridSpawner : EnemySpawnerBase
+    internal class EnemyGridSpawner : EnemySpawnerBase, ITickable
     {
-        [Zenject.Inject] private WaveManagerBase waveManager = null;
-        [Zenject.Inject] private EnemyPool enemyPool = null;
-        [Zenject.Inject] private MiniBossPool miniBossPool = null;
-        [Zenject.Inject] private PlayableArea playableArea = null;
-        [Zenject.Inject] private EnemyDeathFxPool enemyDeathFxPool = null;
+        [Inject] private WaveManagerBase waveManager = null;
+        [Inject] private EnemyPool enemyPool = null;
+        [Inject] private SpecialEnemyPool specialEnemyPool = null;
+        [Inject] private PlayableArea playableArea = null;
+        [Inject] private GameplayController gameplayCtrl = null;
+        [Inject] private EnemyDeathFxPool enemyDeathFxPool = null;
 
-        private Vector3 targetPosOnArc;
-        private Vector3 spawnOffset;
+        private float timeElapsed;
 
         public override void Initialize()
         {
             waveManager.OnWaveTriggered += SpawnEnemies;
-            spawnOffset = Vector3.up * playableArea.Width / 1.5f;
         }
 
         private void SpawnEnemies(WaveManagerBase.Wave currentWave)
@@ -37,34 +37,43 @@ namespace Assets.Code.Gameplay.Units.Enemies
 
                     cell.OccupyCell(spawnedEnemy);
 
-                    if (OnEnemySpawned != null)
-                    {
-                        OnEnemySpawned(spawnedEnemy);
-                    }
+                    OnEnemySpawned?.Invoke(spawnedEnemy);
                 }
-            }
-
-            for (int i = 0; i < currentWave.WaveSettings.MiniBossCount; i++)
-            {
-                //SpawnMiniBoss();
-            }
-        }
-
-        private void SpawnMiniBoss()
-        {
-            //random position on half sphere outside screen view
-            targetPosOnArc = Quaternion.AngleAxis(Random.Range(-90f, 90f), Vector3.forward) * spawnOffset;
-
-            var miniBoss = miniBossPool.Spawn(new MiniBoss.SpawnContext(targetPosOnArc, enemyDeathFxPool));
-            if (OnEnemySpawned != null)
-            {
-                OnEnemySpawned(miniBoss);
             }
         }
 
         public override void Dispose()
         {
             waveManager.OnWaveTriggered -= SpawnEnemies;
+        }
+
+        public void Tick()
+        {
+            if (gameplayCtrl.CurrentGameplayState != EGameplayState.Playing)
+            {
+                return;
+            }
+
+            if (specialEnemyPool.NumActive != 0)
+            {
+                return;
+            }
+
+            timeElapsed += Time.deltaTime;
+
+            if (timeElapsed >= gameplayCtrl.GameplaySettings.SecondsToSpawnSpecialShip)
+            {
+                timeElapsed = 0;
+                SpawnSpecialEnemy();
+            }
+        }
+
+        private void SpawnSpecialEnemy()
+        {
+            var spawnPosition = new Vector3(playableArea.Left, playableArea.TopGridSpawnPosition.y + 1.5f, 0);
+            var direction = Vector3.right;
+            var specialEnemy = specialEnemyPool.Spawn(new SpecialEnemy.SpawnContext(spawnPosition, direction, enemyDeathFxPool));
+            OnEnemySpawned?.Invoke(specialEnemy);
         }
     }
 }

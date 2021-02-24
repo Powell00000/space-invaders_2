@@ -8,9 +8,9 @@ namespace Game.Gameplay
     //here we manage the wave progression, so keeping track of spawned and destroyed enemies
     public class WaveProgressController : IInitializable, IDisposable
     {
-        [Inject] private EnemySpawnerBase enemySpawner = null;
-        [Inject] private InputController inputCtrl = null;
-        [Inject] private GameplayController gameplayCtrl = null;
+        [Inject] protected EnemySpawnerBase enemySpawner = null;
+        [Inject] protected InputController inputCtrl = null;
+        [Inject] protected GameplayController gameplayCtrl = null;
 
         public Action OnWaveFinished;
         private List<Unit> aliveEnemies;
@@ -20,7 +20,7 @@ namespace Game.Gameplay
         public List<Unit> AliveEnemies => aliveEnemies;
         public List<Unit> EnemiesAbleToShoot => GetEnemiesAbleToShoot();
 
-        private int aliveEnemiesCount => aliveEnemies.Count;
+        protected int aliveEnemiesCount => aliveEnemies.Count;
 
         private List<Unit> GetEnemiesAbleToShoot()
         {
@@ -36,6 +36,11 @@ namespace Game.Gameplay
         }
 
         void IInitializable.Initialize()
+        {
+            OnInitialize();
+        }
+
+        protected virtual void OnInitialize()
         {
             aliveEnemies = new List<Unit>(50);
             enemiesAbleToShoot = new List<Unit>(50);
@@ -87,6 +92,11 @@ namespace Game.Gameplay
         }
 
         void IDisposable.Dispose()
+        {
+            OnDispose();
+        }
+
+        protected virtual void OnDispose()
         {
             if (enemySpawner != null)
             {

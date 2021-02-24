@@ -54,6 +54,11 @@ namespace Game.Gameplay
             shootTimer = shootMaxTime;
         }
 
+        public virtual int GetPointsForDestruction()
+        {
+            return Stats.PointsForDestroying;
+        }
+
         protected virtual void ClearEvents()
         {
             OnDamageReceived = null;

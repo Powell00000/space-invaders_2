@@ -19,23 +19,18 @@ namespace Game.Gameplay
         private float animationTimeElapsed;
         private bool isObstructed = false;
 
-        public System.Action<Enemy> OnPooled;
         public override bool CanShoot => base.CanShoot && !isObstructed;
 
         protected override void Initialize()
         {
             animationTimeElapsed = 0;
+            currentAnimationFrame = 0;
             isObstructed = false;
             base.Initialize();
         }
 
         public void OnDespawned()
         {
-            if (OnPooled != null)
-            {
-                OnPooled(this);
-            }
-
             ClearEvents();
         }
 
@@ -64,12 +59,6 @@ namespace Game.Gameplay
                 }
             }
             animationTimeElapsed += Time.deltaTime;
-        }
-
-        protected override void ClearEvents()
-        {
-            base.ClearEvents();
-            OnPooled = null;
         }
 
         protected override void Shoot()
