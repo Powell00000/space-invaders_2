@@ -2,6 +2,7 @@
 using Assets.Code.Gameplay.Waves;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Game.Gameplay
@@ -74,6 +75,11 @@ namespace Game.Gameplay
             Warmup();
         }
 
+        public void ExitToMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
         public void SetPause(bool paused = true)
         {
             if (paused)
@@ -90,6 +96,11 @@ namespace Game.Gameplay
         private void GameOver()
         {
             gameplayState.ChangeState(EGameplayState.GameOver);
+        }
+
+        public void EndGame()
+        {
+            GameOver();
         }
 
         private void StateChanged(EGameplayState state)

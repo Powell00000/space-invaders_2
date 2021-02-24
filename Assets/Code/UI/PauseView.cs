@@ -33,4 +33,9 @@ public class PauseView : MonoBehaviour
     {
         gameplayCtrl.OnStateChanged -= GameStateChanged;
     }
+
+    public void EndGame()
+    {
+        gameplayCtrl.EndGame();
+    }
 }

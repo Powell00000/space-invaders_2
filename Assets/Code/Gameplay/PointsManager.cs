@@ -31,6 +31,11 @@ namespace Game.Gameplay
 
         private void GameplayStateChanged(EGameplayState currentState)
         {
+            if (currentState != EGameplayState.GameOver)
+            {
+                return;
+            }
+
             var additionalPoints = gameplayCtrl.GameplaySettings.BasePointsAmountForFinishing * (gameplayTime / gameplayCtrl.GameplaySettings.MaxGameTimeInSeconds);
             AddPoints(Mathf.CeilToInt(additionalPoints));
 

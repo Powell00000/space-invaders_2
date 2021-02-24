@@ -23,10 +23,11 @@ namespace Game.Gameplay
 
         protected override void Initialize()
         {
-            animationTimeElapsed = 0;
+            animationTimeElapsed = animationDelay;
             currentAnimationFrame = 0;
             isObstructed = false;
             base.Initialize();
+            //Animate();
         }
 
         public void OnDespawned()
