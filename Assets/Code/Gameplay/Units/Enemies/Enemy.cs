@@ -36,6 +36,11 @@ namespace Game.Gameplay
 
         protected override void Update()
         {
+            if (gameplayCtrl.CurrentGameplayState != EGameplayState.Playing)
+            {
+                return;
+            }
+
             base.Update();
             Animate();
             isObstructed = ObstructionChecker.IsObstructed(transform.position, Vector2.down, Layers.Bit.Enemy, 50);

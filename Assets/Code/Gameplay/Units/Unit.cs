@@ -7,7 +7,7 @@ namespace Game.Gameplay
     public abstract class Unit : MonoBehaviour, IUnit
     {
         //TODO: create system for updating units during gameplay state
-        [Inject] private GameplayController gameplayCtrl = null;
+        [Inject] protected GameplayController gameplayCtrl = null;
         [Inject] private DiContainer container;
         [Inject] protected UnitDefinitionsProvider unitDefinitionsProvider = null;
 

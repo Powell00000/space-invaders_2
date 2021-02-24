@@ -12,6 +12,7 @@ namespace Game.UI
         [SerializeField] private GameObject warmup = null;
         [SerializeField] private GameObject gameplay = null;
         [SerializeField] private GameObject gameOver = null;
+        [SerializeField] private GameObject pause = null;
 
         public void Initialize()
         {
@@ -29,6 +30,7 @@ namespace Game.UI
             warmup.SetActive(gameplayCtrl.CurrentGameplayState == EGameplayState.Warmup);
             gameplay.SetActive(gameplayCtrl.CurrentGameplayState == EGameplayState.Playing);
             gameOver.SetActive(gameplayCtrl.CurrentGameplayState == EGameplayState.GameOver);
+            pause.SetActive(gameplayCtrl.CurrentGameplayState == EGameplayState.Playing || gameplayCtrl.CurrentGameplayState == EGameplayState.Pause);
         }
 
         private void LevelRestarting()
