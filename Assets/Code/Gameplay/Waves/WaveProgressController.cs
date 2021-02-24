@@ -18,22 +18,8 @@ namespace Game.Gameplay
 
         //TODO: should it be public?
         public List<Unit> AliveEnemies => aliveEnemies;
-        public List<Unit> EnemiesAbleToShoot => GetEnemiesAbleToShoot();
 
         protected int aliveEnemiesCount => aliveEnemies.Count;
-
-        private List<Unit> GetEnemiesAbleToShoot()
-        {
-            enemiesAbleToShoot.Clear();
-            for (int i = 0; i < aliveEnemies.Count; i++)
-            {
-                if (aliveEnemies[i].CanShoot)
-                {
-                    enemiesAbleToShoot.Add(aliveEnemies[i]);
-                }
-            }
-            return enemiesAbleToShoot;
-        }
 
         void IInitializable.Initialize()
         {
