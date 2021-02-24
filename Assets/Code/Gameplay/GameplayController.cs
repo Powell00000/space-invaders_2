@@ -74,6 +74,18 @@ namespace Game.Gameplay
             Warmup();
         }
 
+        public void SetPause(bool paused = true)
+        {
+            if (paused)
+            {
+                gameplayState.ChangeState(EGameplayState.Pause);
+            }
+            else
+            {
+                gameplayState.ChangeState(EGameplayState.Playing);
+            }
+        }
+
         //both winning and losing
         private void GameOver()
         {
