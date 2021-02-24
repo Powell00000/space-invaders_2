@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarterGames.Assets.AudioManager;
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -10,6 +11,7 @@ namespace Game.Gameplay
         [Inject] protected GameplayController gameplayCtrl = null;
         [Inject] private DiContainer container;
         [Inject] protected UnitDefinitionsProvider unitDefinitionsProvider = null;
+        [Inject] protected AudioManager audioManager;
 
         [SerializeField] protected BoxCollider2D boxCollider2d = null;
         [SerializeField] protected SpriteRenderer spriteRenderer = null;
@@ -34,6 +36,11 @@ namespace Game.Gameplay
 
         protected virtual void Death()
         {
+            if (!string.IsNullOrEmpty(Stats.DeathSound))
+            {
+                audioManager.Play(Stats.DeathSound);
+            }
+
             if (OnDeath != null)
             {
                 OnDeath(this);

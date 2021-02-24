@@ -76,6 +76,7 @@ namespace Game.Gameplay
                 -Vector3.up,
                 enemyStats.Color
             ));
+            audioManager.Play("fastinvader1");
         }
 
         public void OnSpawned(SpawnContext spawnContext, EnemyPool enemyPool)

@@ -1,0 +1,277 @@
+Summary
+Contributors: Jonathan Carter
+Documentation Valid for Version: 2.4.1
+Last Updated: 19/01/2021
+
+Contents
+1 – Package Contents
+2 – First Use Setup
+    2.1 – Initial Setup 
+    2.2 – Scanning
+    2.3 – The Interface
+    2.4 – Extension Scripts
+3 – Using the manager
+    3.1 – Audio Manager Methods
+    3.2 – Music Player Methods
+    3.3 – UI Audio Player Methods
+4 – Error Messages
+5 – Common Problems
+1) Package Information
+
+The package has 5 main folders & 15 files:
+
+Editor/Carter Games/Audio Manager: AudioManagerEditor.cs, MusicPlayerEditor.cs & UIAudipPlayerEditor.cs.
+Gizmos/Carter Games/Assets/AudioManager AudioManagerFile Icon.png
+Prefabs/Carter Games/Audio Manager: AudioPrefab.prefab
+Resourses/Carter Games/Audio Manager: LogoAM.png, Play.png & Stop.png
+Scripts/Carter Games/Audio Manager: AudioManagerScript.cs, AudioManagerFile.cs, MusicPlayer.cs & UIAudioPlayer.cs.
+ChangeLog: Shows the changes from previous verisons of the asset.
+Readme: Text file that goes the required and optional files in the asset along with any extra setup needed.
+Docs: Text file that links to here and provides an offline copy of this page.
+
+2) First Use Setup
+
+Initial Setup
+Once the package has been imported into the project, create a empty gameobject for the manager and add the Audio Manager Script to it or add it to an existing gameobject if you wish. When using the script 
+for the first time it will create a directory “/audio” if it doesn’t already exist, you will need to store the audio in this directory for script to work. The script will also create the directory “/audio/files” 
+which is used as the default location for the script to make an audio manager file if it needs to. Next you will need to assign a prefab to the script, this is used to play the audio when you call a function to play 
+a clip. There is a prefab in the package, which is setup correctly, however you are welcome to make your own and customize it.
+
+
+Directories
+The asset supports multiple directores. If the audio manager file inputted has no directores you will be prompted to add a directory and continue. If there is already a directory you can add additional ones by using 
+the green plus button and remove directories by pressing the red minus button next to the directory you wish to remove. to scan the /audio directory, just have a blank directory field in your list and it will scan 
+the directory.
+
+
+Scanning & the scanned path
+By default the script scans the “/audio” directory if you have left a directory field blank, you can change the path to go to any sub-directory within the “/audio” folder, or add additional directories using 
+the inspector display. This field is not case sensitive as shown below:
+
+Example 1: mygame – “/audio/mygame” will be scanned
+Example 2: MyGame – “/audio/mygame” will be scanned (capitals are ignored)
+Example 3: MyGame/SFX – “/audio/mygame/sfx” will be scanned
+
+The script will automatically update with the new sounds once you hve entered a valid directory. Once scanned the script will list all the audioclips it has found. This will update on the fly when you add new 
+files into your scanned directory. 
+
+
+The Interface
+Once it scans the set directory it will show each clip in a list but a preview button and the clip name for each clip. Pressing the preview button (the green arrow) plays the clip associated with it in the inspector, 
+please note that the clip will play at the default volume and pitch. You can stop the preview by pressing the stop button next to the clip, which will appear when a clip is been played (the red square). The names of 
+all the clips can be selected and copied directly from the inspector of the script so you can avoid typo’s when calling the sound to be played.
+
+
+Extension Scripts
+In 2.4.0 we have added additional scripts to the asset. These scripts can are read-only and do not edit the Audio Manager File when used. Below are the extra scripts and what they do:
+
+Music Player (Alpha)
+The music player script allows the playing of background music in games, the script has a couple of transitions to fade between 2 tracks but is still in its early days and will likely have more added to it
+in future updates.
+
+UI Audio Player (Alpha)
+The UI Audio Player makes it easier to play audio from an Audio Manager FIle using Unity Events that are commonly found on UI Buttons. The script has a custom inspector to assign sounds to play on call and can use
+the standard Play, PlayFromTime & PlayWithDelay methods as needed. This script is also in its early days and will likely have more added to it in future updates.
+
+
+
+3) Using the Manager to play sounds
+The first step to this is getting the manager, referencing the script and assigning it is the easiest way, you can also use findobjectoftype or tags to get the gameobject the script is on and get the audiomanager
+component. Once you have a reference setup, there are a variety of methods you can use to play the clips.
+
+Audio Manager Methods:
+All the following functions have the optional passthrough for changing the volume the clip is played at as well as the pitch the clip is played at. You don’t have to enter a value into a method call to use them for 
+instance (Note: both of these example assume your variable reference to the audio manager script is “audioManager”):
+
+audioManager.PlayClip("MySound");
+This will play MySound at the default volume of 1 and default pitch of 1.
+
+audioManager.PlayClip("MySound", .5f);
+This will play MySound at the volume of 0.5 with the default pitch of 1. You get the idea…..
+
+Play Methods:
+
+PlayClip(string Request, float Volume, float Pitch)
+Plays the requested clip as is.
+
+PlayClip(string Request, AudioMixerGroup mixer ,float Volume, float Pitch)
+Plays the requested clip as is on the mixer inputted (not from the Audio Manager).
+
+PlayClip(string Request, int mixerID, float Volume, float Pitch)
+Plays the requested clip as is on the mixer set in the Audio Manager, the mixer ID can be found next to the mixer you want to use in the inspector.
+
+PlayClip(string Request, GameObject Object, float Volume, float Pitch)
+Plays the requested clip, but plays it on a different gameobject.
+
+PlayClip(string Request, GameObject Object, AudioMixerGroup mixer, float Volume, float Pitch)
+Plays the requested clip, but plays it on a different gameobject on the mixer inputted (not from the Audio Manager).
+
+PlayClip(string Request, GameObject Object, int mixerID, float Volume, float Pitch)
+Plays the requested clip, but plays it on a different gameobject on the mixer set in the Audio Manager, the mixer ID can be found next to the mixer you want to use in the inspector.
+
+PlayClip(string Request, Vector3 Position, float Volume, float Pitch)
+Plays the requested clip, but plays at the entered location.
+
+PlayClip(string Request, Vector3 Position, AudioMixerGroup mixer, float Volume, float Pitch)
+Plays the requested clip, but plays at the entered location on the mixer inputted (not from the Audio Manager).
+
+PlayClip(string Request, Vector3 Position, int mixerID, float Volume, float Pitch)
+Plays the requested clip, but plays at the entered location on the mixer set in the Audio Manager, the mixer ID can be found next to the mixer you want to use in the inspector.
+
+PlayFromTime(string Request, float Time, float Volume, float Pitch)
+Plays the requested clip from the desired time.
+
+PlayFromTime(string Request, float Time, AudioMixerGroup mixer, float Volume, float Pitch)
+Plays the requested clip from the desired time on the mixer inputted (not from the Audio Manager).
+
+PlayFromTime(string Request, float Time, int mixerID, float Volume, float Pitch)
+Plays the requested clip from the desired time on the mixer set in the Audio Manager, the mixer ID can be found next to the mixer you want to use in the inspector.
+
+PlayFromTime(string Request, float Time, GameObject Object, float Volume, float Pitch)
+Plays the requested clip from the desired time, but plays it on a different gameobject.
+
+PlayFromTime(string Request, float Time, GameObject Object, AudioMixerGroup mixer, float Volume, float Pitch)
+Plays the requested clip from the desired time, but plays it on a different gameobject on the mixer inputted (not from the Audio Manager).
+
+PlayFromTime(string Request, float Time, GameObject Object, int mixerID, float Volume, float Pitch)
+Plays the requested clip from the desired time, but plays it on a different gameobject and on the mixer set in the Audio Manager, the mixer ID can be found next to the mixer you want to use in the inspector.
+
+PlayFromTime(string Request, float Time, Vector3 Position, float Volume, float Pitch)
+Plays the requested clip from the desired time, but plays at the entered location.
+
+PlayFromTime(string Request, float Time, Vector3 Position, AudioMixerGroup mixer, float Volume, float Pitch)
+Plays the requested clip from the desired time, but plays at the entered location, on the mixer inputted (not from the Audio Manager).
+
+PlayFromTime(string Request, float Time, Vector3 Position, int mixerID, float Volume, float Pitch)
+Plays the requested clip from the desired time, but plays at the entered location and on the mixer set in the Audio Manager, the mixer ID can be found next to the mixer you want to use in the inspector.
+
+PlayWithDelay(string Request, float Delay, float Volume, float Pitch)
+Plays the requested clip but waits for the desired time before playing.
+
+PlayWithDelay(string Request, float Delay, AudioMixerGroup mixer, float Volume, float Pitch)
+Plays the requested clip but waits for the desired time before playing, on the mixer inputted (not from the Audio Manager).
+
+PlayWithDelay(string Request, float Delay, int mixerID, float Volume, float Pitch)
+Plays the requested clip but waits for the desired time before playing and on the mixer set in the Audio Manager, the mixer ID can be found next to the mixer you want to use in the inspector.
+
+PlayWithDelay(string Request, float Delay, GameObject Object, float Volume, float Pitch)
+Plays the requested clip but waits for the desired time before playing as well as playing the clip from the desired gameobject.
+
+PlayWithDelay(string Request, float Delay, GameObject Object, AudioMixerGroup mixer, float Volume, float Pitch)
+Plays the requested clip but waits for the desired time before playing as well as playing the clip from the desired gameobject. On the mixer inputted (not from the Audio Manager).
+
+PlayWithDelay(string Request, float Delay, GameObject Object, int mixerID, float Volume, float Pitch)
+Plays the requested clip but waits for the desired time before playing as well as playing the clip from the desired gameobject. On the mixer set in the Audio Manager, the mixer ID can be found next to the mixer you want to use in the inspector.
+
+PlayWithDelay(string Request, float Delay, Vector3 Position, float Volume, float Pitch)
+Plays the requested clip but waits for the desired time before playing as well as playing the clip from the desired location.
+
+PlayWithDelay(string Request, float Delay, Vector3 Position, AudioMixerGroup mixer, float Volume, float Pitch)
+Plays the requested clip but waits for the desired time before playing as well as playing the clip from the desired location. On the mixer inputted (not from the Audio Manager).
+
+PlayWithDelay(string Request, float Delay, Vector3 Position, int mixerID, float Volume, float Pitch)
+Plays the requested clip but waits for the desired time before playing as well as playing the clip from the desired location. On the mixer set in the Audio Manager, the mixer ID can be found next to the mixer you want to use in the inspector.
+
+PlayRandom(float Volume, float Pitch)
+Plays a random sound from the manager.
+
+PlayRandom(AudioMixerGroup mixer, float Volume, float Pitch)
+Plays a random sound from the manager, on the mixer inputted (not from the Audio Manager).
+
+PlayRandom(int mixerID, float Volume, float Pitch)
+Plays a random sound from the manager, on the mixer set in the Audio Manager, the mixer ID can be found next to the mixer you want to use in the inspector.
+
+PlayRandomFromTime(float Time, float Volume, float Pitch)
+Plays a random sound from the manager but allowing you to add a time to play from if you need it.
+
+PlayRandomFromTime(float Time, AudioMixerGroup mixer, float Volume, float Pitch)
+Plays a random sound from the manager but allowing you to add a time to play from if you need it, on the mixer inputted (not from the Audio Manager).
+
+PlayRandomFromTime(float Time, int mixerID, float Volume, float Pitch)
+Plays a random sound from the manager but allowing you to add a time to play from if you need it, on the mixer set in the Audio Manager, the mixer ID can be found next to the mixer you want to use in the inspector.
+
+PlayRandomWithDelay(float Delay, float Volume, float Pitch)
+Plays a random sound from the manager but allowing you to add delay before playing the chosen clip.
+
+PlayRandomWithDelay(float Delay, AudioMixerGroup mixer, float Volume, float Pitch)
+Plays a random sound from the manager but allowing you to add delay before playing the chosen clip, on the mixer inputted (not from the Audio Manager).
+
+PlayRandomWithDelay(float Delay, int mixerID, float Volume, float Pitch)
+Plays a random sound from the manager but allowing you to add delay before playing the chosen clip, on the mixer set in the Audio Manager, the mixer ID can be found next to the mixer you want to use in the inspector.
+
+
+Utility Methods:
+These functions are mostly there for utility purposes, say you want to know how many clips the manager has? or want to be able to hot swap the audiomanagerfile the manager uses? these help make this possible.
+
+GetNumberOfClips()
+This gets the number of clips stored on the manager it is called from and returns the result. 
+Returns: int
+
+GetRandomSound()
+This gets a random sound from the manager it is called from and returns the result. 
+Returns: AudioClip
+
+ChangeAudioManagerFile(AudioManagerFile File)
+This changes the audiomanagerfile used on the audiomanager file in question to the passed through file.
+
+GetAudioManagerFile()
+This gets the current audiomanagerfile being used and returns it.
+Returns: AudioManagerFile
+
+
+Music Player Methods:
+
+ChangeActiveTrack()
+Toggles the active track that should be playing.
+
+ChangeActiveTrack(Audioclip request)
+Changes the active track to the inputted audioclip track.
+
+FadeIn()
+Runs the fade in transition on the active track.
+
+FadeOut()
+Runs the fade out transition on the active track.
+
+CrossFade()
+Runs the crossfade transition on the active track.
+
+CrossFade(AudipClip toFadeTo, bool shouldMatchTime)
+Runs the crossfade transition on the track inputted, if the bool is entered it will match the time index with the current track. Default value for the bool is false.
+
+
+UI Audio Player Methods:
+
+Play()
+Plays all of the tracks selected in the inspector with the settings set in the inspector.
+
+PlayFromTime(float time)
+Plays all of the tracks selected in the inspector with the settings set in the inspector but from the time inputted.
+
+PlayWithDelay(float delay)
+Plays all of the tracks selected in the inspector with the settings set in the inspector but with the inputted delay.
+
+
+4) Error Messages & Common Problems
+The scripts have a selection of error messages in the form of console warnings, all errors from this script come with the prefix “Audio Manager |” so you will know it is from this package. Most errors shouldn’t come up, 
+but they should explain what you’ve done wrong and how to fix it.
+
+Warning Code 1: Make sure you have a sound prefab assigned to the AMF you are using, this is caused when there is not prefab found.
+Warning Code 2: Make sure you have spelt the clip you want correctly, this warning shows up if the audio could not be found in the audio manager when called.
+Warning Code 3: Could not find audio mixer, Please ensure the mixer is in the inspector and you have the right ID.
+Warning Code 4: No AudioSource Component found on the Sound Prefab. Please ensure a AudioSouce Component is attached to your prefab.
+
+However, if you run into a problem or get an error and are unsure, feel free to drop us an email at (hello@carter.games) and we’ll do my best to help you out.
+
+5) Common Problems
+The manager can find my audio:
+Please make sure all audio you want to use with this manager is in the /audio directory or in the defined sub-directories you are trying to scan. If this is a feature you require, please do let us know!
+
+I called a function to play audio and nothing happened:
+Please make sure you spelt the clip name correctly, note it is CaSe SeNsItIvE, also make sure the code is running with a debug log and the script is references correctly.
+
+I called a function and the clip plays a million times!!!:
+This is due to you having the call in an update() or similar, if you have the call in update you need to have either a boolean or a coroutine to stop it been called more than once.
+
+The Inspector hasn’t loaded correctly when I added the script:
+If this has happened, please sent me screenshots and ways to replicate the problem so I can fix it. email: hello@carter.games

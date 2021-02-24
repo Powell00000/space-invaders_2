@@ -3,7 +3,11 @@
 [CreateAssetMenu(menuName = "Stats/Units/Player")]
 public class PlayerStats : UnitStats
 {
-    [SerializeField] float speed = 10;
+    [SerializeField] private string shootSound;
+
+    [SerializeField] private float speed = 10;
 
     public float Speed => speed;
+
+    public string ShootSound => shootSound;
 }

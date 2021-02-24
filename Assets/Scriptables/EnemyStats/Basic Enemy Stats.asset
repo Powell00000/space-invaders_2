@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad042a965dadfaf4e993aac8b7925c94, type: 3}
   m_Name: Basic Enemy Stats
   m_EditorClassIdentifier: 
-  health: 1
+  hitsTillDeath: 1
   pointsForDestroying: 10
   color: {r: 1, g: 0, b: 0, a: 1}
   baseProjectileSpeed: 8
   shootTime: 1
+  deathSound: invaderkilled
   flySpeed: 10
   movementSpeed: 2
+  animationFrames: []

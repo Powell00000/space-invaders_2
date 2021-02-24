@@ -17,4 +17,6 @@ MonoBehaviour:
   color: {r: 1, g: 0.89338535, b: 0, a: 1}
   baseProjectileSpeed: 12
   shootTime: 1
+  deathSound: 
+  shootSound: shoot
   speed: 10

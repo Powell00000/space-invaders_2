@@ -1,6 +1,7 @@
 ﻿using Assets.Code.Gameplay;
 using Assets.Code.Gameplay.Units.Enemies;
 using Assets.Code.Gameplay.Waves;
+using CarterGames.Assets.AudioManager;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,7 @@ namespace Game.Gameplay
         [SerializeField] private PlayableArea playableArea = null;
         [SerializeField] private WaveManagerBase waveManager = null;
         [SerializeField] private GameplaySettings gameplaySettings;
+        [SerializeField] private AudioManager audioManager;
 
 
         public override void InstallBindings()
@@ -24,6 +26,7 @@ namespace Game.Gameplay
             Container.Bind<PlayableArea>().FromInstance(playableArea);
             Container.Bind<UnitDefinitionsProvider>().FromInstance(unitDefinitionsProvider);
             Container.Bind<GameplaySettings>().FromInstance(gameplaySettings);
+            Container.Bind<AudioManager>().FromInstance(audioManager);
 
             var enemySpawner = new EnemyGridSpawner();
             Container.Bind<EnemySpawnerBase>().FromInstance(enemySpawner);
