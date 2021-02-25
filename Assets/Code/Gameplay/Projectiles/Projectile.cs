@@ -8,7 +8,7 @@ namespace Game.Gameplay
     {
         [SerializeField] private ProjectileStats stats = null;
         [SerializeField] private BoxCollider2D boxCollider2d = null;
-        [SerializeField] private MeshRenderer meshRenderer = null;
+        [SerializeField] private SpriteRenderer spriteRenderer = null;
 
         //playable area should keep track of out of bounds objects?
         [Inject] private PlayableArea playableArea = null;
@@ -45,7 +45,7 @@ namespace Game.Gameplay
 
             faction = spawnContext.Instigator.Faction;
 
-            meshRenderer.SetEmission(spawnContext.Color);
+            spriteRenderer.color = spawnContext.Color;
 
             //manage parameters regarding instigator faction
             switch (spawnContext.Instigator.Faction)

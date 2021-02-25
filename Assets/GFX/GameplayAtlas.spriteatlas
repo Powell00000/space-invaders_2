@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GameplayAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 91a4c88f299150045985d2e4e44e5fd3, type: 3}
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: b4d8027994b0f5a4c8b1e5b37e0c347e, type: 3}
+  - {fileID: 21300000, guid: bd31715b329b0a5489e08e62ef25c20c, type: 3}
+  - {fileID: -7611812954639256507, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -3732781224220902406, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -1191463368141114451, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: 7184986583935804710, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: 1385802319322352269, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -9119532841569723840, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -4705757912464044164, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: 6994548646066583941, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: 8535904028482237896, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -5657151519978511594, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: 7800703560180344041, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: 7696097031515420551, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -2517490452998157926, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -2056164038505139968, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -7973177879682857641, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: 2441608266099078980, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -1334514939914696026, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -7588944164959730508, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -345746844893582906, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -7664766573405560681, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  - {fileID: -73136083907114378, guid: 1aea7b0e36191c14381dc2337b8043c8, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - playerLife
+  - square
+  - dlf.pt-space-invaders-png-4618726_18
+  - dlf.pt-space-invaders-png-4618726_19
+  - dlf.pt-space-invaders-png-4618726_9
+  - dlf.pt-space-invaders-png-4618726_8
+  - dlf.pt-space-invaders-png-4618726_10
+  - dlf.pt-space-invaders-png-4618726_11
+  - dlf.pt-space-invaders-png-4618726_12
+  - dlf.pt-space-invaders-png-4618726_13
+  - dlf.pt-space-invaders-png-4618726_1
+  - dlf.pt-space-invaders-png-4618726_14
+  - dlf.pt-space-invaders-png-4618726_0
+  - dlf.pt-space-invaders-png-4618726_15
+  - dlf.pt-space-invaders-png-4618726_3
+  - dlf.pt-space-invaders-png-4618726_16
+  - dlf.pt-space-invaders-png-4618726_2
+  - dlf.pt-space-invaders-png-4618726_17
+  - dlf.pt-space-invaders-png-4618726_5
+  - dlf.pt-space-invaders-png-4618726_4
+  - dlf.pt-space-invaders-png-4618726_7
+  - dlf.pt-space-invaders-png-4618726_6
+  - dlf.pt-space-invaders-png-4618726_20
+  m_Tag: GameplayAtlas
+  m_IsVariant: 0
