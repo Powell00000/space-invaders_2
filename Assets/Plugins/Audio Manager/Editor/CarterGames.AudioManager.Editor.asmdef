@@ -1,0 +1,17 @@
+{
+    "name": "CarterGames.AudioManager.Editor",
+    "references": [
+        "GUID:43ce4ad111bddec4680480817f49868b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
